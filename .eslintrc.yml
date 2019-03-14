@@ -1,0 +1,6 @@
+extends: airbnb-base
+
+- files:
+    - test/**/*.test.{js,mjs}
+  env:
+    mocha: yes
