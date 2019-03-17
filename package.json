@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/app.js",
     "test": "NODE_ENV=staging mocha test/** --exit",
-    "dev": "NODE_ENV=development nodemon src/app.js"
+    "dev": "NODE_ENV=development nodemon src/app.js",
+    "deploy": "gcloud app deploy",
+    "browse": "gcloud app browse"
   },
   "repository": {
     "type": "git",
