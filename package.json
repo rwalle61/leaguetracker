@@ -2,9 +2,12 @@
   "name": "leaguetracker",
   "version": "1.0.0",
   "description": "App that tracks the ELO rankings of players in a league",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "start": "node src/app.js",
+    "test": "mocha test/**",
+    "dev": "nodemon src/app.js",
+    "ci": "start-test 8888"
   },
   "repository": {
     "type": "git",
@@ -18,9 +21,16 @@
   "homepage": "https://github.com/rwalle61/leaguetracker#readme",
   "devDependencies": {
     "chai": "*",
+    "chai-http": "^4.2.1",
     "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "mocha": "*"
+    "eslint-plugin-mocha": "^5.3.0",
+    "mocha": "*",
+    "nodemon": "^1.18.10",
+    "start-server-and-test": "^1.7.12"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }

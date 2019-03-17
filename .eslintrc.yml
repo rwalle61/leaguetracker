@@ -1,6 +1,11 @@
 extends: airbnb-base
 
-- files:
-    - test/**/*.test.{js,mjs}
-  env:
-    mocha: yes
+env:
+  node: true
+
+rules:
+  indent:
+    - warn
+    - 4
+    - {SwitchCase: 1}
+  no-console : off
