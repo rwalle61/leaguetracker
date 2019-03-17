@@ -1,9 +1,8 @@
 const express = require('express');
 
 const routes = require('./routes');
-const config = require('./config');
+const { port } = require('./config');
 
-const { port } = config.dev;
 const app = express();
 
 app.use(routes);
