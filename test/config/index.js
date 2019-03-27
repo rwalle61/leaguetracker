@@ -1,5 +1,5 @@
-// const appUrl = 'localhost:8888';
+// const example = 'asdf';
 
 module.exports = {
-    // appUrl,
+    // example,
 };
