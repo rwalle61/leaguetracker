@@ -15,8 +15,8 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/', async (req, res) => {
-    const seasonUpdateOptions = seasonsController.validateUpdateOptions(req.body);
     try {
+        const seasonUpdateOptions = seasonsController.validateUpdateOptions(req.body);
         const detailsOfUpdatedSeason = await seasonsController.updateSeason(seasonUpdateOptions);
         res.status(200).send(detailsOfUpdatedSeason);
     } catch (error) {

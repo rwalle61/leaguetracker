@@ -1,17 +1,17 @@
-function getProbabilityOfWin(team1Score, team2Score) {
+function calculateProbabilityOfWin(team1Score, team2Score) {
     const exponent = (team2Score - team1Score) / 400;
     return 1 / (1 + (10 ** exponent));
 }
 
-function getDelta(winnersTeamScore, losersTeamScore) {
-    const expectedProbability = getProbabilityOfWin(winnersTeamScore, losersTeamScore);
+function calculateDelta(winnersTeamScore, losersTeamScore) {
+    const expectedProbability = calculateProbabilityOfWin(winnersTeamScore, losersTeamScore);
 
     const delta = Math.round(32 * (1 - expectedProbability));
 
     return Math.max(delta, 1);
 }
 
-function getTeamScore(players) {
+function calculateTeamScore(players) {
     const total = players
         .map(player => player.score)
         .reduce((subtotal, score) => subtotal + score);
@@ -22,19 +22,19 @@ function getTeamScore(players) {
 function updatePlayers(game) {
     const { winners, losers } = game;
 
-    const winnersScore = getTeamScore(winners);
-    const losersScore = getTeamScore(losers);
+    const winnersScore = calculateTeamScore(winners);
+    const losersScore = calculateTeamScore(losers);
 
-    const delta = getDelta(winnersScore, losersScore);
+    const delta = calculateDelta(winnersScore, losersScore);
 
-    for (let i = 0; i < winners.length; i++) {
-        winners[i].score += delta;
-        winners[i].wins += 1;
-    }
-    for (let i = 0; i < losers.length; i++) {
-        losers[i].score -= delta;
-        losers[i].losses += 1;
-    }
+    winners.forEach((player) => {
+        player.score += delta;
+        player.wins += 1;
+    });
+    losers.forEach((player) => {
+        player.score -= delta;
+        player.losses += 1;
+    });
 
     return [...winners, ...losers];
 }

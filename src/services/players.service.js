@@ -15,6 +15,7 @@ function createPlayer(
         score,
         wins,
         losses,
+        rank: undefined,
     };
 }
 

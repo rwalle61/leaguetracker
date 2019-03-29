@@ -1,20 +1,42 @@
 const playersService = require('./players.service');
 const eloService = require('./elo.service');
 
-const getPlayers = season => season.players;
+function getPlayers(season) {
+    return season.players;
+}
 
 function getPlayer(season, playerName) {
-    return getPlayers().find(player => player.name === playerName);
+    return getPlayers(season).find(player => player.name === playerName);
 }
 
 function createSeason(creationOptions) {
     const { seasonName, playerNames } = creationOptions;
     const players = playerNames.map(name => playersService.createPlayer(name));
+    const rankedPlayers = assignPlayerRanks(players);
     const season = {
         seasonName,
-        players,
+        players: rankedPlayers,
     };
     return season;
+}
+
+function assignPlayerRanks(players) {
+    const playersCopy = [...players];
+    const sortedPlayers = playersCopy.sort((player1, player2) => (player1.score < player2.score));
+    let scoreOfPreviousPlayer;
+    let rankOfPreviousPlayer;
+    const rankedPlayers = sortedPlayers.map((player, index) => {
+        if (player.score === scoreOfPreviousPlayer) {
+            player.rank = rankOfPreviousPlayer;
+        } else {
+            const rank = index + 1;
+            player.rank = rank;
+            rankOfPreviousPlayer = rank;
+        }
+        scoreOfPreviousPlayer = player.score;
+        return player;
+    });
+    return rankedPlayers;
 }
 
 function updatePlayer(season, updatedPlayer) {
@@ -24,8 +46,13 @@ function updatePlayer(season, updatedPlayer) {
 
 function updateSeason(updateOptions) {
     const { season, game } = updateOptions;
-    const players = eloService.updatePlayers(game);
-    players.forEach((player) => {
+    const { namesOfWinners, namesOfLosers } = game;
+    const winners = namesOfWinners.map(name => getPlayer(season, name));
+    const losers = namesOfLosers.map(name => getPlayer(season, name));
+
+    const players = eloService.updatePlayers({ winners, losers });
+    const rankedPlayers = assignPlayerRanks(players);
+    rankedPlayers.forEach((player) => {
         updatePlayer(season, player);
     });
     return season;
