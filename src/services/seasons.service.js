@@ -22,7 +22,7 @@ function createSeason(creationOptions) {
 
 function assignPlayerRanks(players) {
     const playersCopy = [...players];
-    const sortedPlayers = playersCopy.sort(player => player.score).reverse();
+    const sortedPlayers = playersCopy.sort((player1, player2) => (player1.score < player2.score));
     let scoreOfPreviousPlayer;
     let rankOfPreviousPlayer;
     const rankedPlayers = sortedPlayers.map((player, index) => {
@@ -49,7 +49,7 @@ function updateSeason(updateOptions) {
     const { namesOfWinners, namesOfLosers } = game;
     const winners = namesOfWinners.map(name => getPlayer(season, name));
     const losers = namesOfLosers.map(name => getPlayer(season, name));
-    
+
     const players = eloService.updatePlayers({ winners, losers });
     const rankedPlayers = assignPlayerRanks(players);
     rankedPlayers.forEach((player) => {
