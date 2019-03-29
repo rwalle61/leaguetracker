@@ -1,5 +1,11 @@
-const season1 = require('../data/season.1');
 const playersService = require('./players.service');
+const eloService = require('./elo.service');
+
+const getPlayers = season => season.players;
+
+function getPlayer(season, playerName) {
+    return getPlayers().find(player => player.name === playerName);
+}
 
 function createSeason(creationOptions) {
     const { seasonName, playerNames } = creationOptions;
@@ -11,7 +17,23 @@ function createSeason(creationOptions) {
     return season;
 }
 
+function updatePlayer(season, updatedPlayer) {
+    const playerIndex = season.players.findIndex(p => p.name === updatedPlayer.name);
+    season.players[playerIndex] = updatedPlayer;
+}
+
+function updateSeason(updateOptions) {
+    const { season, game } = updateOptions;
+    const players = eloService.updatePlayers(game);
+    players.forEach((player) => {
+        updatePlayer(season, player);
+    });
+    return season;
+}
+
 module.exports = {
-    getPlayers: () => season1.players,
+    getPlayers,
+    getPlayer,
     createSeason,
+    updateSeason,
 };

@@ -28,7 +28,4 @@ const players = [
     },
 ];
 
-module.exports = {
-    name: 'Pool Season 1',
-    players,
-};
+module.exports = players;
