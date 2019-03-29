@@ -19,7 +19,7 @@ function createSeason(creationOptions) {
 
 function updatePlayer(season, updatedPlayer) {
     const playerIndex = season.players.findIndex(p => p.name === updatedPlayer.name);
-    season.players[index] = updatedPlayer;
+    season.players[playerIndex] = updatedPlayer;
 }
 
 function updateSeason(updateOptions) {
