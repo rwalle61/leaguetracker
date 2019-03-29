@@ -4,7 +4,7 @@ const eloService = require('./elo.service');
 const getPlayers = season => season.players;
 
 function getPlayer(season, playerName) {
-    return season.players.find(player => player.name === playerName);
+    return getPlayers().find(player => player.name === playerName);
 }
 
 function createSeason(creationOptions) {
