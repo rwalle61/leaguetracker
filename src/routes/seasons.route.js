@@ -14,4 +14,15 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.put('/', async (req, res) => {
+    const seasonUpdateOptions = seasonsController.validateUpdateOptions(req.body);
+    try {
+        const detailsOfUpdatedSeason = await seasonsController.updateSeason(seasonUpdateOptions);
+        res.status(200).send(detailsOfUpdatedSeason);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+
 module.exports = router;

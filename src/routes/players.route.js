@@ -14,6 +14,7 @@ router.get('/:id', async (req, res) => {
         const player = await playersController.getPlayer(req.params.id);
         res.status(200).send(player);
     } catch (error) {
+        console.log(error);
         if (error.msg.includes('player not found')) {
             res.sendStatus(404);
             return;
