@@ -71,6 +71,52 @@ describe('/seasons', function () {
         });
         it('returns 200 and a body containing the season details', async function () {
             const seasonUpdateOptions = {
+                season: {
+                    seasonName: 'Pool Season 1',
+                    players: [
+                        {
+                            name: 'Craig', score: 1000, wins: 0, losses: 0, rank: 2,
+                        }, {
+                            name: 'Richard', score: 1000, wins: 0, losses: 0, rank: 2,
+                        }, {
+                            name: 'Tom', score: 1001, wins: 1, losses: 0, rank: 1,
+                        },
+                    ],
+                },
+                game: {
+                    namesOfWinners: ['Craig'],
+                    namesOfLosers: ['Richard'],
+                },
+            };
+            const res = await app()
+                .put('/seasons')
+                .send(seasonUpdateOptions);
+            expect(res.status).to.equal(200);
+            expect(res.body.seasonName).to.equal(seasonUpdateOptions.season.seasonName);
+            expect(res.body.players).to.be.an('array').with.deep.members([
+                {
+                    name: 'Craig',
+                    score: 1016,
+                    wins: 1,
+                    losses: 0,
+                    rank: 1,
+                }, {
+                    name: 'Richard',
+                    score: 984,
+                    wins: 0,
+                    losses: 1,
+                    rank: 3,
+                }, {
+                    name: 'Tom',
+                    score: 1001,
+                    wins: 1,
+                    losses: 0,
+                    rank: 2,
+                },
+            ]);
+        });
+        it('returns 200 and a body containing the season details', async function () {
+            const seasonUpdateOptions = {
                 season: season1,
                 game: {
                     namesOfWinners: ['Craig', 'Richard'],
