@@ -4,7 +4,6 @@ plugins:
 env:
   mocha: true
 
-
 rules:
   func-names: off
   prefer-arrow-callback: off
@@ -16,7 +15,4 @@ rules:
   mocha/no-top-level-hooks: error
   mocha/max-top-level-suites:
     - warn
-    - {limit: 1}
-
-  # "no-unused-expressions": 0,
-  # "chai-friendly/no-unused-expressions": 2
+    - limit: 1
