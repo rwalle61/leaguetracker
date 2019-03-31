@@ -55,11 +55,12 @@ describe('/seasons', function () {
                 .put('/seasons')
                 .send(seasonUpdateOptions);
             expect(res.status).to.equal(200);
-            expect(res.body.seasonName).to.equal(seasonUpdateOptions.season.seasonName);
-            expect(res.body.players).to.be.an('array').with.deep.members([
+            expect(res.body.season.seasonName).to.equal(seasonUpdateOptions.season.seasonName);
+            expect(res.body.season.players).to.be.an('array').with.deep.members([
                 { name: 'Craig', score: 1016, wins: 1, losses: 0, rank: 1 },
                 { name: 'Richard', score: 984, wins: 0, losses: 1, rank: 2 },
             ]);
+            expect(res.body.deltas).to.be.an('array').with.deep.members([16]);
         });
 
         it('returns 200 and a body containing the season details', async function () {
@@ -83,12 +84,13 @@ describe('/seasons', function () {
                 .put('/seasons')
                 .send(seasonUpdateOptions);
             expect(res.status).to.equal(200);
-            expect(res.body.seasonName).to.equal(seasonUpdateOptions.season.seasonName);
-            expect(res.body.players).to.be.an('array').with.deep.members([
+            expect(res.body.season.seasonName).to.equal(seasonUpdateOptions.season.seasonName);
+            expect(res.body.season.players).to.be.an('array').with.deep.members([
                 { name: 'Craig', score: 1016, wins: 1, losses: 0, rank: 1 },
                 { name: 'Richard', score: 984, wins: 0, losses: 1, rank: 3 },
                 { name: 'Tom', score: 1001, wins: 1, losses: 0, rank: 2 },
             ]);
+            expect(res.body.deltas).to.be.an('array').with.deep.members([16]);
         });
 
         it('returns 200 and a body containing the season details', async function () {
@@ -109,8 +111,8 @@ describe('/seasons', function () {
                 .put('/seasons')
                 .send(seasonUpdateOptions);
             expect(res.status).to.equal(200);
-            expect(res.body.seasonName).to.equal(seasonUpdateOptions.season.seasonName);
-            expect(res.body.players).to.be.an('array').with.deep.members([
+            expect(res.body.season.seasonName).to.equal(seasonUpdateOptions.season.seasonName);
+            expect(res.body.season.players).to.be.an('array').with.deep.members([
                 {
                     name: 'Craig', score: 1083, wins: 35, losses: 25, rank: 1,
                 }, {
@@ -139,6 +141,7 @@ describe('/seasons', function () {
                     name: 'Jamie', score: 914, wins: 3, losses: 9, rank: 13,
                 },
             ]);
+            expect(res.body.deltas).to.be.an('array').with.deep.members([14,19]);
         });
     });
 });
