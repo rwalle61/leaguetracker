@@ -23,7 +23,7 @@ describe('/seasons', function () {
         describe('with invalid req.body (seasonCreationOptions)', function () {
             describe('since playerNames is not a String array', function () {
                 describe('and is instead a 2D array', function () {
-                    it('returns status 400 and text explaining how input was invalid', async function () {
+                    it('returns 400 and text explaining how input was invalid', async function () {
                         const seasonCreationOptions = {
                             seasonName: 'Pool Season 1',
                             playerNames: [['Craig']],
