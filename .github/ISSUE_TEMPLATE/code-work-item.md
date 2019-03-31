@@ -1,6 +1,6 @@
 ---
 name: Code work item
-about: For quickly creating a small coding work item with a checklist of things to do
+about: For quickly creating a coding work item with a checklist of things to do
 title: ''
 labels: ''
 assignees: ''
