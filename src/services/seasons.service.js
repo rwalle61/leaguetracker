@@ -46,7 +46,7 @@ function updatePlayer(season, updatedPlayer) {
 
 function updateSeason(updateOptions) {
     const { season, games } = updateOptions;
-    let deltas = []
+    const deltas = []
     games.forEach(game => {
         const { namesOfWinners, namesOfLosers } = game;
         const winners = namesOfWinners.map(name => getPlayer(season, name));
