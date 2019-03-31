@@ -10,8 +10,10 @@ function getPlayer(season, playerName) {
 }
 
 function createSeason(creationOptions) {
-    const { seasonName, playerNames } = creationOptions;
-    const players = playerNames.map(name => playersService.createPlayer(name));
+    const { seasonName, playersOptions } = creationOptions;
+    const players = playersOptions.map(
+        playerOptions => playersService.createPlayer(playerOptions.name, playerOptions.score)
+    );
     const rankedPlayers = assignPlayerRanks(players);
     const season = {
         seasonName,

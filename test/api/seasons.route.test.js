@@ -4,35 +4,64 @@ const { app, expect } = require('../setup');
 describe('/seasons', function () {
     describe('POST', function () {
         describe('with valid req.body (seasonCreationOptions)', function () {
-            it('returns 201 and a body containing the season details', async function () {
-                const seasonCreationOptions = {
-                    seasonName: 'Pool Season 1',
-                    playerNames: ['Craig', 'Richard'],
-                };
-                const res = await app()
-                    .post('/seasons')
-                    .send(seasonCreationOptions);
-                expect(res.status).to.equal(201);
-                expect(res.body.seasonName).to.equal(seasonCreationOptions.seasonName);
-                expect(res.body.players).to.be.an('array').with.deep.members([
-                    { name: 'Craig', score: 1000, wins: 0, losses: 0, rank: 1 },
-                    { name: 'Richard', score: 1000, wins: 0, losses: 0, rank: 1 },
-                ]);
+            describe('containing 2 players (with default options)', function () {
+                it('returns 201 and a body containing the season details', async function () {
+                    const seasonCreationOptions = {
+                        seasonName: 'Pool Season 1',
+                        playersOptions: [
+                            { name: 'Craig' },
+                            { name: 'Richard' },
+                        ],
+                    };
+                    const res = await app()
+                        .post('/seasons')
+                        .send(seasonCreationOptions);
+                    expect(res.status).to.equal(201);
+                    expect(res.body.seasonName).to.equal(seasonCreationOptions.seasonName);
+                    expect(res.body.players).to.be.an('array').with.deep.members([
+                        { name: 'Craig', score: 1000, wins: 0, losses: 0, rank: 1 },
+                        { name: 'Richard', score: 1000, wins: 0, losses: 0, rank: 1 },
+                    ]);
+                });
+            });
+            describe('containing 2 players (1 starting on a different score)', function () {
+                it('returns 201 and a body containing the season details', async function () {
+                    const seasonCreationOptions = {
+                        seasonName: 'Pool Season 1',
+                        playersOptions: [
+                            { name: 'Craig', score: 1001 },
+                            { name: 'Richard' },
+                        ],
+                    };
+                    const res = await app()
+                        .post('/seasons')
+                        .send(seasonCreationOptions);
+                    expect(res.status).to.equal(201);
+                    expect(res.body.seasonName).to.equal(seasonCreationOptions.seasonName);
+                    expect(res.body.players).to.be.an('array').with.deep.members([
+                        { name: 'Craig', score: 1001, wins: 0, losses: 0, rank: 1 },
+                        { name: 'Richard', score: 1000, wins: 0, losses: 0, rank: 2 },
+                    ]);
+                });
             });
         });
         describe('with invalid req.body (seasonCreationOptions)', function () {
-            describe('since playerNames is not a String array', function () {
-                describe('and is instead a 2D array', function () {
+            describe('since the player name is not a String', function () {
+                describe('and is instead an array', function () {
                     it('returns 400 and text explaining how input was invalid', async function () {
                         const seasonCreationOptions = {
                             seasonName: 'Pool Season 1',
-                            playerNames: [['Craig']],
+                            playersOptions: [
+                                { 
+                                    name: ['Craig'], 
+                                },
+                            ],
                         };
                         const res = await app()
                             .post('/seasons')
                             .send(seasonCreationOptions);
                         expect(res.status).to.equal(400);
-                        expect(res.text).to.equal('playerNames must be a String array but instead contains a array');
+                        expect(res.text).to.equal('player names must be Strings not arrays');
                     });
                 });
             });
