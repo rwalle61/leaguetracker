@@ -6,9 +6,8 @@ function validateCreationOptions(req, res, next) {
     const { playersOptions } = req.body;
     playersOptions.forEach((player) => {
         let name = player.name
-        if (typeof name !== 'string') {
-            // handle errors using this pattern and our errorHandler middleware, rather than try-catches
-            const err = new Error(`playerNames must be a String array but instead contains a ${typeOf(name)}`);
+        if (typeOf(name) !== 'string') {
+            const err = new Error(`player names must be Strings not ${typeOf(name)}s`);
             err.statusCode = 400;
             next(err);
         }
