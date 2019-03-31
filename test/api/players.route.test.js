@@ -3,11 +3,11 @@ const { app, expect } = require('../setup');
 
 describe('/players', function () {
     describe('GET', function () {
-        it('returns 200 and a body containing a list of players', async function () {
+        it('returns 200 and a body listing all players', async function () {
             const res = await app().get('/players');
             expect(res.status).to.equal(200);
             expect(res.body).to.be.an('array');
-            expect(res.body).to.all.have.property('name');
+            expect(res.body).to.deep.equal(players);
         });
     });
 
