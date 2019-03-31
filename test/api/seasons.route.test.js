@@ -44,10 +44,12 @@ describe('/seasons', function () {
                         { name: 'Richard', score: 1000, wins: 0, losses: 0, rank: 1 },
                     ],
                 },
-                game: {
-                    namesOfWinners: ['Craig'],
-                    namesOfLosers: ['Richard'],
-                },
+                games: [
+                    { 
+                        namesOfWinners: ['Craig'],
+                        namesOfLosers: ['Richard'],
+                    },
+                ],
             };
             const res = await app()
                 .put('/seasons')
@@ -70,10 +72,12 @@ describe('/seasons', function () {
                         { name: 'Tom', score: 1001, wins: 1, losses: 0, rank: 1 },
                     ],
                 },
-                game: {
-                    namesOfWinners: ['Craig'],
-                    namesOfLosers: ['Richard'],
-                },
+                games: [
+                    { 
+                        namesOfWinners: ['Craig'],
+                        namesOfLosers: ['Richard'],
+                    },
+                ],
             };
             const res = await app()
                 .put('/seasons')
@@ -90,10 +94,16 @@ describe('/seasons', function () {
         it('returns 200 and a body containing the season details', async function () {
             const seasonUpdateOptions = {
                 season: season1,
-                game: {
-                    namesOfWinners: ['Craig', 'Richard'],
-                    namesOfLosers: ['Jack', 'Luke'],
-                },
+                games: [
+                    { 
+                        namesOfWinners: ['Craig', 'Richard'],
+                        namesOfLosers: ['Jack', 'Luke'],
+                    },
+                    { 
+                        namesOfWinners: ['Jack', 'Luke'],
+                        namesOfLosers: ['Craig', 'Richard'],
+                    },
+                ],
             };
             const res = await app()
                 .put('/seasons')
@@ -101,19 +111,33 @@ describe('/seasons', function () {
             expect(res.status).to.equal(200);
             expect(res.body.seasonName).to.equal(seasonUpdateOptions.season.seasonName);
             expect(res.body.players).to.be.an('array').with.deep.members([
-                { name: 'Craig', score: 1102, wins: 35, losses: 24, rank: 1 },
-                { name: 'Richard', score: 1095, wins: 11, losses: 5, rank: 2 },
-                { name: 'Jack', score: 1037, wins: 16, losses: 14, rank: 3 },
-                { name: 'Luke', score: 1035, wins: 14, losses: 11, rank: 4 },
-                { name: 'Nik', score: 1034, wins: 14, losses: 14, rank: 5 },
-                { name: 'James', score: 1015, wins: 1, losses: 0, rank: 6 },
-                { name: 'Matt', score: 1001, wins: 18, losses: 16, rank: 7 },
-                { name: 'Judith', score: 985, wins: 16, losses: 21, rank: 8 },
-                { name: 'Liam', score: 966, wins: 10, losses: 13, rank: 9 },
-                { name: 'Matthew', score: 950, wins: 27, losses: 29, rank: 10 },
-                { name: 'Danny', score: 949, wins: 8, losses: 11, rank: 11 },
-                { name: 'Beth', score: 917, wins: 1, losses: 7, rank: 12 },
-                { name: 'Jamie', score: 914, wins: 3, losses: 9, rank: 13 },
+                {
+                    name: 'Craig', score: 1083, wins: 35, losses: 25, rank: 1,
+                }, {
+                    name: 'Richard', score: 1076, wins: 11, losses: 6, rank: 2,
+                }, {
+                    name: 'Jack', score: 1056, wins: 17, losses: 14, rank: 3,
+                }, {
+                    name: 'Luke', score: 1054, wins: 15, losses: 11, rank: 4,
+                }, {
+                    name: 'Nik', score: 1034, wins: 14, losses: 14, rank: 5,
+                }, {
+                    name: 'James', score: 1015, wins: 1, losses: 0, rank: 6,
+                }, {
+                    name: 'Matt', score: 1001, wins: 18, losses: 16, rank: 7,
+                }, {
+                    name: 'Judith', score: 985, wins: 16, losses: 21, rank: 8,
+                }, {
+                    name: 'Liam', score: 966, wins: 10, losses: 13, rank: 9,
+                }, {
+                    name: 'Matthew', score: 950, wins: 27, losses: 29, rank: 10,
+                }, {
+                    name: 'Danny', score: 949, wins: 8, losses: 11, rank: 11,
+                }, {
+                    name: 'Beth', score: 917, wins: 1, losses: 7, rank: 12,
+                }, {
+                    name: 'Jamie', score: 914, wins: 3, losses: 9, rank: 13,
+                },
             ]);
         });
     });

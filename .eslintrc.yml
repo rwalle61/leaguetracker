@@ -1,4 +1,6 @@
-extends: airbnb-base
+extends: 
+  - airbnb-base
+  - eslint:recommended
 
 env:
   node: true
@@ -18,3 +20,7 @@ rules:
   object-curly-newline:
     - error
     - consistent: true
+
+parserOptions:
+  ecmaVersion: 2018
+  sourceType: "module"
