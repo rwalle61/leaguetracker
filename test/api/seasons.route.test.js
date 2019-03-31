@@ -39,7 +39,7 @@ describe('/seasons', function () {
         });
     });
     describe('PUT', function () {
-        describe('with valid req.body (seasonCreationOptions)', function () {
+        describe('with valid req.body (seasonUpdateOptions)', function () {
             describe('containing 1 game of 2 players (and a season of 2 players)', function () {
                 it('returns 200 and a body containing the season details', async function () {
                     const season = {
