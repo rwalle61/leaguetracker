@@ -3,8 +3,9 @@ const { typeOf } = require('../utils');
 
 
 function validateCreationOptions(req, res, next) {
-    const { seasonName, playerNames } = req.body;
-    playerNames.forEach((name) => {
+    const { playersOptions } = req.body;
+    playersOptions.forEach((player) => {
+        let name = player.name
         if (typeof name !== 'string') {
             // handle errors using this pattern and our errorHandler middleware, rather than try-catches
             const err = new Error(`playerNames must be a String array but instead contains a ${typeOf(name)}`);
