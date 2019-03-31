@@ -61,7 +61,6 @@ describe('/seasons', function () {
                             .post('/seasons')
                             .send(seasonCreationOptions);
                         expect(res.status).to.equal(400);
-                        // TODO: change message
                         expect(res.text).to.equal('player names must be Strings not arrays');
                     });
                 });
