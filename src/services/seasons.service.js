@@ -45,18 +45,20 @@ function updatePlayer(season, updatedPlayer) {
 }
 
 function updateSeason(updateOptions) {
-    const { season, game } = updateOptions;
-    const { namesOfWinners, namesOfLosers } = game;
-    const winners = namesOfWinners.map(name => getPlayer(season, name));
-    const losers = namesOfLosers.map(name => getPlayer(season, name));
+    const { season, games } = updateOptions;
+    games.forEach(game => {
+        const { namesOfWinners, namesOfLosers } = game;
+        const winners = namesOfWinners.map(name => getPlayer(season, name));
+        const losers = namesOfLosers.map(name => getPlayer(season, name));
 
-    const players = eloService.updatePlayers({ winners, losers });
-    players.forEach((player) => {
-        updatePlayer(season, player);
-    });
-    const rankedPlayers = assignPlayerRanks(season.players);
-    rankedPlayers.forEach((player) => {
-        updatePlayer(season, player);
+        const players = eloService.updatePlayers({ winners, losers });
+        players.forEach((player) => {
+            updatePlayer(season, player);
+        });
+        const rankedPlayers = assignPlayerRanks(season.players);
+        rankedPlayers.forEach((player) => {
+            updatePlayer(season, player);
+        });
     });
     return season;
 }

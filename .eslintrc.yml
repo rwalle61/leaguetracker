@@ -1,4 +1,6 @@
-extends: airbnb-base
+extends: 
+  - airbnb-base
+  - eslint:recommended
 
 env:
   node: true
@@ -15,3 +17,6 @@ rules:
   no-use-before-define:
     - error
     - functions: false
+parserOptions:
+  ecmaVersion: 2018
+  sourceType: "module"

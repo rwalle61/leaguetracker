@@ -1,6 +1,6 @@
 function calculateProbabilityOfWin(team1Score, team2Score) {
     const exponent = (team2Score - team1Score) / 400;
-    return 1 / (1 + (10 ** exponent));
+    return 1 / (1 + 10 ** exponent);
 }
 
 function calculateDelta(winnersTeamScore, losersTeamScore) {
@@ -31,6 +31,7 @@ function updatePlayers(game) {
         player.score += delta;
         player.wins += 1;
     });
+
     losers.forEach((player) => {
         player.score -= delta;
         player.losses += 1;

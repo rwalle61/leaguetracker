@@ -43,10 +43,12 @@ describe('/seasons', function () {
                         },
                     ],
                 },
-                game: {
-                    namesOfWinners: ['Craig'],
-                    namesOfLosers: ['Richard'],
-                },
+                games: [
+                    { 
+                        namesOfWinners: ['Craig'],
+                        namesOfLosers: ['Richard'],
+                    },
+                ],
             };
             const res = await app()
                 .put('/seasons')
@@ -83,10 +85,12 @@ describe('/seasons', function () {
                         },
                     ],
                 },
-                game: {
-                    namesOfWinners: ['Craig'],
-                    namesOfLosers: ['Richard'],
-                },
+                games: [
+                    { 
+                        namesOfWinners: ['Craig'],
+                        namesOfLosers: ['Richard'],
+                    },
+                ],
             };
             const res = await app()
                 .put('/seasons')
@@ -118,10 +122,16 @@ describe('/seasons', function () {
         it('returns 200 and a body containing the season details', async function () {
             const seasonUpdateOptions = {
                 season: season1,
-                game: {
-                    namesOfWinners: ['Craig', 'Richard'],
-                    namesOfLosers: ['Jack', 'Luke'],
-                },
+                games: [
+                    { 
+                        namesOfWinners: ['Craig', 'Richard'],
+                        namesOfLosers: ['Jack', 'Luke'],
+                    },
+                    { 
+                        namesOfWinners: ['Jack', 'Luke'],
+                        namesOfLosers: ['Craig', 'Richard'],
+                    },
+                ],
             };
             const res = await app()
                 .put('/seasons')
@@ -130,13 +140,13 @@ describe('/seasons', function () {
             expect(res.body.seasonName).to.equal(seasonUpdateOptions.season.seasonName);
             expect(res.body.players).to.be.an('array').with.deep.members([
                 {
-                    name: 'Craig', score: 1102, wins: 35, losses: 24, rank: 1,
+                    name: 'Craig', score: 1083, wins: 35, losses: 25, rank: 1,
                 }, {
-                    name: 'Richard', score: 1095, wins: 11, losses: 5, rank: 2,
+                    name: 'Richard', score: 1076, wins: 11, losses: 6, rank: 2,
                 }, {
-                    name: 'Jack', score: 1037, wins: 16, losses: 14, rank: 3,
+                    name: 'Jack', score: 1056, wins: 17, losses: 14, rank: 3,
                 }, {
-                    name: 'Luke', score: 1035, wins: 14, losses: 11, rank: 4,
+                    name: 'Luke', score: 1054, wins: 15, losses: 11, rank: 4,
                 }, {
                     name: 'Nik', score: 1034, wins: 14, losses: 14, rank: 5,
                 }, {
