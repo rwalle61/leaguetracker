@@ -46,21 +46,26 @@ function updatePlayer(season, updatedPlayer) {
 
 function updateSeason(updateOptions) {
     const { season, games } = updateOptions;
+    let deltas = []
     games.forEach(game => {
         const { namesOfWinners, namesOfLosers } = game;
         const winners = namesOfWinners.map(name => getPlayer(season, name));
         const losers = namesOfLosers.map(name => getPlayer(season, name));
 
-        const players = eloService.updatePlayers({ winners, losers });
+        const { players, delta } = eloService.updatePlayers({ winners, losers });
+        deltas.push(delta);
         players.forEach((player) => {
             updatePlayer(season, player);
         });
         const rankedPlayers = assignPlayerRanks(season.players);
-        rankedPlayers.forEach((player) => {
+        rankedPlayers.map((player) => {
             updatePlayer(season, player);
         });
     });
-    return season;
+    return { 
+        season,
+        deltas,
+    };
 }
 
 module.exports = {

@@ -36,8 +36,11 @@ function updatePlayers(game) {
         player.score -= delta;
         player.losses += 1;
     });
-
-    return [...winners, ...losers];
+    const players = [...winners, ...losers]
+    return {
+        players,
+        delta
+    };
 }
 
 module.exports = {
