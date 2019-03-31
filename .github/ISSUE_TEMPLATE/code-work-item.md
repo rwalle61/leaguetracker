@@ -9,8 +9,9 @@ assignees: ''
 
 - note 1
 - [ ] plan
+- [ ] doc
 - [ ] write automated tests
 - [ ] implement
-- [ ] doc
+- [ ] PR
 - [ ] re-deploy
 
