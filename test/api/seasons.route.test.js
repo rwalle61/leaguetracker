@@ -45,6 +45,7 @@ describe('/seasons', function () {
                 });
             });
         });
+        // TODO add fail cases of sending only playerNames or seasonName
         describe('with invalid req.body (seasonCreationOptions)', function () {
             describe('since the player name is not a String', function () {
                 describe('and is instead an array', function () {
