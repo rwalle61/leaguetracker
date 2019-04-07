@@ -5,10 +5,12 @@ const path = require('path');
 
 const router = express.Router();
 
-const swaggerDoc = YAML.load(path.join(__dirname, '../public/swagger.yml'));
+const pathToDocsDir = path.join(__dirname, '../../public/docs');
+
+const swaggerDoc = YAML.load(path.join(pathToDocsDir, 'swagger.yml'));
 
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/redoc.html'));
+    res.sendFile(path.join(pathToDocsDir, 'redoc.html'));
 });
 
 router.get('/swagger/raw', (req, res) => {
