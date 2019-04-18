@@ -9,7 +9,7 @@ const { expect } = require('./chai.setup');
 
 const validator = new ZSchema({});
 
-const pathToApiSpec = path.join(__dirname, '../../public/docs/full.swagger.yml');
+const pathToApiSpec = path.join(__dirname, '../../public/docs/openApi3.yml');
 const apiSpec = yaml.safeLoad(fs.readFileSync(pathToApiSpec));
 const openApiSchemas = apiSpec.components.schemas;
 

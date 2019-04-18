@@ -1,7 +1,7 @@
 const players = require('../../src/data/players');
 const { app, expect, jsonSchemas, fitsSchema } = require('../setup');
 
-describe.only('/players', function () {
+describe('/players', function () {
     describe('GET', function () {
         it('returns 200 and a body listing all players', async function () {
             const res = await app().get('/players');
