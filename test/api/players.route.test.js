@@ -1,5 +1,5 @@
 const players = require('../../src/data/players');
-const { app, expect } = require('../setup');
+const { app, expect, jsonSchemas, fitsSchema } = require('../setup');
 
 describe('/players', function () {
     describe('GET', function () {
@@ -7,6 +7,9 @@ describe('/players', function () {
             const res = await app().get('/players');
             expect(res.status).to.equal(200);
             expect(res.body).to.be.an('array');
+            for (const member of res.body) {
+                expect(fitsSchema(member, jsonSchemas.Player)).to.be.true;
+            }
             expect(res.body).to.deep.equal(players);
         });
     });
@@ -18,6 +21,7 @@ describe('/players', function () {
                 it('returns 200 and a body containing the player requested', async function () {
                     const res = await app().get(`/players/${playerName}`);
                     expect(res.status).to.equal(200);
+                    expect(fitsSchema(res.body, jsonSchemas.Player)).to.be.true;
                     const expectedPlayer = players.find(player => player.name === playerName);
                     expect(res.body).to.deep.equal(expectedPlayer);
                 });

@@ -19,29 +19,31 @@ tags:
   # - name: admin
   #   description: Operations available only to authenticated admins
 paths:
+  /:
+    get:
+      summary: Health endpoint
+      responses:
+        '200':
+          description: App healthy
   /players:
     get:
       tags:
         - users
-      summary: A list of players
+      summary: List all players
       responses:
         '200':
-          description: player info
+          description: Got player info
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Player'
-        '400':
-          description: bad input parameter
-        '404':
-          $ref: '#/components/responses/404NotFound'
   /players/{id}:
     get:
       tags:
         - users
-      summary: A single player
+      summary: Get a single player
       parameters:
         - in: path
           name: id
@@ -51,26 +53,60 @@ paths:
             $ref: '#/components/schemas/ID'
       responses:
         '200':
-          description: player info
+          description: Got player info
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Player'
         '400':
-          description: bad input parameter
+          description: Bad input parameter
         '404':
           $ref: '#/components/responses/404NotFound'
+  /seasons:
+    post:
+        tags:
+            - users
+        summary: Create a new season
+        requestBody:
+            description: season creation options
+            required: true
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        properties:
+                            seasonName:
+                                type: string
+                            playersOptions:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Player'
+        responses:
+            '201':
+                description: Season created
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                seasonName:
+                                    type: string
+                                players:
+                                    type: array
+                                    items:
+                                        $ref: '#/components/schemas/Player'
+            '400':
+                description: Bad input parameter
 components:
   schemas:
     Player:
       type: object
       required:
-        - id
+        # - id
         - name
         - score
         - wins
         - losses
-        - deltas
       properties:
         id:
           $ref: '#/components/schemas/ID'
@@ -86,13 +122,6 @@ components:
         losses:
           type: integer
           example: 1
-        deltas:
-          $ref: '#/components/schemas/Deltas'
-    Deltas:
-      type: array
-      items:
-        type: integer
-      example: [ -10 ]
     ID:
       type: string
       # format: uuid
