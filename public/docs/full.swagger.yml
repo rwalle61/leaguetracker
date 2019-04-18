@@ -1,0 +1,125 @@
+openapi: 3.0.0
+servers:
+  - description: Production
+    url: https://leaguetracker.appspot.com/
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/LeagueTracker/Test/1.0.0
+info:
+  description: API to track league results
+  version: "1.0.0"
+  title: League Tracking API
+  contact:
+    email: rwalle61@yahoo.com
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+tags:
+  - name: users
+    description: Operations available to regular users
+  # - name: admin
+  #   description: Operations available only to authenticated admins
+paths:
+  /players:
+    get:
+      tags:
+        - users
+      summary: A list of players
+      responses:
+        '200':
+          description: player info
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Player'
+  /players/{id}:
+    get:
+      tags:
+        - users
+      summary: A single player
+      parameters:
+        - in: path
+          name: id
+          # description: pass a required player id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          description: player info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '400':
+          description: bad input parameter
+        '404':
+          $ref: '#/components/responses/404NotFound'
+  /seasons:
+    post:
+        tags:
+            - users
+        summary: create a new season
+        requestBody:
+            description: season creation options
+            required: true
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        properties:
+                            seasonName:
+                                type: string
+                            playersOptions:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Player'
+        responses:
+            '201':
+                description: Season created
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                seasonName:
+                                    type: string
+                                players:
+                                    type: array
+                                    items:
+                                        $ref: '#/components/schemas/Player'
+            '400':
+                description: bad input parameter
+components:
+  schemas:
+    Player:
+      type: object
+      required:
+        # - id
+        - name
+        - score
+        - wins
+        - losses
+      properties:
+        id:
+          $ref: '#/components/schemas/ID'
+        name:
+          type: string
+          example: Craig Forrest
+        score:
+          type: integer
+          example: 990
+        wins:
+          type: integer
+          example: 0
+        losses:
+          type: integer
+          example: 1
+    ID:
+      type: string
+      # format: uuid
+      # example: d290f1ee-6c54-4b01-90e6-d701748f0851
+  responses:
+    404NotFound:
+      description: The specified resource was not found.

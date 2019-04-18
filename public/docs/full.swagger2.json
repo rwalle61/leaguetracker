@@ -1,0 +1,210 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "League Tracking API",
+    "description": "API to track league results",
+    "contact": {
+      "email": "rwalle61@yahoo.com"
+    }
+  },
+  "host": "leaguetracker.appspot.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/players": {
+      "get": {
+        "description": "A list of players",
+        "summary": "A list of players",
+        "tags": [
+          "users"
+        ],
+        "operationId": "PlayersGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "player info",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Player"
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "bad input parameter",
+            "schema": {}
+          },
+          "404": {
+            "description": "The specified resource was not found.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/players/{id}": {
+      "get": {
+        "description": "A single player",
+        "summary": "A single player",
+        "tags": [
+          "users"
+        ],
+        "operationId": "PlayersByIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "player info",
+            "schema": {
+              "$ref": "#/definitions/Player"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "bad input parameter",
+            "schema": {}
+          },
+          "404": {
+            "description": "The specified resource was not found.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/seasons": {
+      "post": {
+        "description": "create a new season",
+        "summary": "create a new season",
+        "tags": [
+          "users"
+        ],
+        "operationId": "SeasonsPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "season creation options",
+            "schema": {
+              "$ref": "#/definitions/SeasonsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Season created",
+            "schema": {
+              "$ref": "#/definitions/SeasonsResponse"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "bad input parameter",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Player": {
+      "title": "Player",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "example": "Craig Forrest",
+          "type": "string"
+        },
+        "score": {
+          "example": 990,
+          "type": "integer",
+          "format": "int32"
+        },
+        "wins": {
+          "example": 0,
+          "type": "integer",
+          "format": "int32"
+        },
+        "losses": {
+          "example": 1,
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "score",
+        "wins",
+        "losses"
+      ]
+    },
+    "SeasonsRequest": {
+      "title": "SeasonsRequest",
+      "type": "object",
+      "properties": {
+        "seasonName": {
+          "type": "string"
+        },
+        "playersOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Player"
+          }
+        }
+      }
+    },
+    "SeasonsResponse": {
+      "title": "SeasonsResponse",
+      "type": "object",
+      "properties": {
+        "seasonName": {
+          "type": "string"
+        },
+        "players": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Player"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "users",
+      "description": "Operations available to regular users"
+    }
+  ]
+}
