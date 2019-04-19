@@ -1,4 +1,5 @@
-const { app, expect } = require('../setup');
+const app = require('../setup/app.setup');
+const { expect } = require('../setup/chai.setup');
 
 describe('/api-docs', function () {
     describe('GET', function () {
@@ -41,6 +42,13 @@ describe('/api-docs', function () {
                 describe('GET', function () {
                     it('returns 200 and an OpenAPI 2 doc in JSON form', async function () {
                         const res = await app().get('/api-docs/openApi/raw/2');
+                        expect(res.status).to.equal(200);
+                        expect(res.body.swagger).to.equal('2.0');
+                    });
+                });
+                describe('PUT', function () {
+                    it('returns 200 and an OpenAPI 2 doc in JSON form', async function () {
+                        const res = await app().put('/api-docs/openApi/raw/2');
                         expect(res.status).to.equal(200);
                         expect(res.body.swagger).to.equal('2.0');
                     });
