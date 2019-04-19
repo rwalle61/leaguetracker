@@ -4,8 +4,8 @@
   "description": "App that tracks the ELO rankings of players in a league",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
-    "test": "NODE_ENV=staging mocha test/** --exit",
+    "start": "NODE_ENV=production node src/app.js",
+    "test": "NODE_ENV=staging mocha test --recursive --exit",
     "dev": "NODE_ENV=development nodemon src/app.js",
     "deploy": "gcloud app deploy",
     "browse": "gcloud app browse"
@@ -34,6 +34,7 @@
     "z-schema": "^4.0.2"
   },
   "dependencies": {
+    "api-spec-converter": "^2.8.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "fs-extra": "^7.0.1",

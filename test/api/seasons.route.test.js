@@ -1,5 +1,6 @@
 const season1 = require('../../src/data/season.1');
-const { app, expect } = require('../setup');
+const app = require('../setup/app.setup');
+const { expect } = require('../setup/chai.setup');
 
 describe('/seasons', function () {
     describe('POST', function () {
@@ -53,8 +54,8 @@ describe('/seasons', function () {
                         const seasonCreationOptions = {
                             seasonName: 'Pool Season 1',
                             playersOptions: [
-                                { 
-                                    name: ['Craig'], 
+                                {
+                                    name: ['Craig'],
                                 },
                             ],
                         };

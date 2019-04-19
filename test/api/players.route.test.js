@@ -1,5 +1,7 @@
 const players = require('../../src/data/players');
-const { app, expect, jsonSchemas, fitsSchema } = require('../setup');
+const app = require('../setup/app.setup');
+const { expect } = require('../setup/chai.setup');
+const { jsonSchemas, fitsSchema } = require('../setup/schemas.setup');
 
 describe('/players', function () {
     describe('GET', function () {

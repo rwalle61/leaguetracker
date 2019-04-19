@@ -1,4 +1,5 @@
-const { app, expect } = require('../setup');
+const app = require('../setup/app.setup');
+const { expect } = require('../setup/chai.setup');
 
 describe('/', function () {
     describe('GET', function () {

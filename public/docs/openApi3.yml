@@ -16,8 +16,8 @@ info:
 tags:
   - name: users
     description: Operations available to regular users
-  # - name: admin
-  #   description: Operations available only to authenticated admins
+  - name: admin
+    description: Operations available only to authenticated admins
 paths:
   /:
     get:
@@ -97,6 +97,37 @@ paths:
                                         $ref: '#/components/schemas/Player'
             '400':
                 description: Bad input parameter
+  /api-docs:
+    get:
+      summary: Get this API's docs
+      responses:
+        '200':
+          description: Got this API's docs
+  /api-docs/openApi/raw:
+    get:
+      summary: Get this API's OAS as JSON
+      responses:
+        '200':
+          description: Got this API's OAS as JSON
+  /api-docs/openApi/raw/3:
+    get:
+      summary: Get this API's OAS as JSON
+      responses:
+        '200':
+          description: Got this API's OAS as JSON
+  /api-docs/openApi/raw/2:
+    get:
+      summary: Get this API's OAS2 as JSON
+      responses:
+        '200':
+          description: Got this API's OAS2 as JSON
+    put:
+      tags:
+        - admin
+      summary: Sync this API's OAS2 with its OAS3
+      responses:
+        '200':
+          description: Synced this API's OAS2 with its OAS3
 components:
   schemas:
     Player:
