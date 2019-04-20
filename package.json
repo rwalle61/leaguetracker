@@ -7,6 +7,7 @@
     "start": "NODE_ENV=production node src/app.js",
     "test": "NODE_ENV=staging mocha test --recursive --exit",
     "dev": "NODE_ENV=development nodemon src/app.js",
+    "debug": "NODE_ENV=development node --inspect src/app.js",
     "deploy": "gcloud app deploy",
     "browse": "gcloud app browse"
   },
