@@ -7,8 +7,14 @@ assignees: ''
 
 ---
 
-- note 1
-- note 2
+- Current user story:
+- Proposed gain:
+- Proposed cost: time
+- Alternative methods of achieving the gain (and why they're not as good as this method): 
+    - 
+    -
+
+Progress:
 - [ ] 
 - [ ] 
 - [ ] 
