@@ -37,6 +37,7 @@
     "api-spec-converter": "^2.8.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "express-openapi-validate": "^0.4.4",
     "fs-extra": "^7.0.1",
     "js-yaml": "^3.13.1",
     "path": "^0.12.7",

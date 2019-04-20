@@ -2,6 +2,8 @@ const Converter = require('api-spec-converter');
 const path = require('path');
 const fs = require('fs-extra');
 
+const { pathToDocsDir } = require('../config');
+
 function typeOf(variable) {
     if (Array.isArray(variable)) return 'array';
     return typeof variable;
@@ -9,8 +11,6 @@ function typeOf(variable) {
 
 async function syncOpenApi2and3Docs() {
     // write an OpenApi 2 Doc from our existing OpenApi 3 Doc
-    const pathToDocsDir = path.join(__dirname, '../../public/docs');
-
     const convertedJson = await Converter.convert({
         from: 'openapi_3',
         to: 'swagger_2',

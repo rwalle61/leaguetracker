@@ -159,7 +159,7 @@
               "properties": {
                 "playersOptions": {
                   "items": {
-                    "$ref": "#/definitions/Player"
+                    "$ref": "#/definitions/PlayerOptions"
                   },
                   "type": "array"
                 },
@@ -197,6 +197,102 @@
           "users"
         ],
         "summary": "Create a new season"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "season update options",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "games": {
+                  "items": {
+                    "properties": {
+                      "namesOfLosers": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "namesOfWinners": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "season": {
+                  "properties": {
+                    "players": {
+                      "items": {
+                        "$ref": "#/definitions/Player"
+                      },
+                      "type": "array"
+                    },
+                    "seasonName": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "required": [
+                "season",
+                "games"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Season updated",
+            "schema": {
+              "properties": {
+                "deltas": {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array"
+                },
+                "season": {
+                  "properties": {
+                    "players": {
+                      "items": {
+                        "$ref": "#/definitions/Player"
+                      },
+                      "type": "array"
+                    },
+                    "seasonName": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "400": {
+            "description": "Bad input parameter"
+          }
+        },
+        "tags": [
+          "users"
+        ],
+        "summary": "Update a season"
       }
     }
   },
@@ -231,6 +327,33 @@
         "score",
         "wins",
         "losses"
+      ],
+      "type": "object"
+    },
+    "PlayerOptions": {
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ID"
+        },
+        "losses": {
+          "example": 1,
+          "type": "integer"
+        },
+        "name": {
+          "example": "Craig Forrest",
+          "type": "string"
+        },
+        "score": {
+          "example": 990,
+          "type": "integer"
+        },
+        "wins": {
+          "example": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name"
       ],
       "type": "object"
     }

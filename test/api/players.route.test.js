@@ -29,7 +29,7 @@ describe('/players', function () {
                 });
             });
             describe('with invalid req.params.id (playerName)', function () {
-                describe('since this player doesn\'t exist', function () {
+                describe('(player doesn\'t exist)', function () {
                     const playerName = 'Non-existent player';
                     it('returns 404 and text explaining the problem', async function () {
                         const res = await app().get(`/players/${playerName}`);

@@ -1,18 +1,19 @@
 const express = require('express');
 
 const { seasonsController } = require('../controllers');
+const { validateReq } = require('../middleware/reqValidator');
 
 const router = express.Router();
 
 router.post('/',
-    seasonsController.validateCreationOptions,
+    validateReq('post', '/seasons'),
     async (req, res) => {
         const detailsOfCreatedSeason = await seasonsController.createSeason(req.body);
         res.status(201).send(detailsOfCreatedSeason);
     });
 
 router.put('/',
-    seasonsController.validateUpdateOptions,
+    validateReq('put', '/seasons'),
     async (req, res) => {
         const detailsOfUpdatedSeason = await seasonsController.updateSeason(req.body);
         res.status(200).send(detailsOfUpdatedSeason);

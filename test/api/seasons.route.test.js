@@ -48,23 +48,21 @@ describe('/seasons', function () {
         });
 
         describe('with invalid req.body (seasonCreationOptions)', function () {
-            describe('since the player name is not a String', function () {
-                describe('and is instead an array', function () {
-                    it('returns 400 and text explaining how input was invalid', async function () {
-                        const seasonCreationOptions = {
-                            seasonName: 'Pool Season 1',
-                            playersOptions: [
-                                {
-                                    name: ['Craig'],
-                                },
-                            ],
-                        };
-                        const res = await app()
-                            .post('/seasons')
-                            .send(seasonCreationOptions);
-                        expect(res.status).to.equal(400);
-                        expect(res.text).to.equal('player names must be Strings not arrays');
-                    });
+            describe('(playersOptions.name should be a String, but is instead an array)', function () {
+                it('returns 400 and text explaining how req was invalid', async function () {
+                    const seasonCreationOptions = {
+                        seasonName: 'Pool Season 1',
+                        playersOptions: [
+                            {
+                                name: ['Craig'],
+                            },
+                        ],
+                    };
+                    const res = await app()
+                        .post('/seasons')
+                        .send(seasonCreationOptions);
+                    expect(res.status).to.equal(400);
+                    expect(res.text).to.equal('Error while validating request: request.body.playersOptions[0].name should be string');
                 });
             });
         });
@@ -164,6 +162,43 @@ describe('/seasons', function () {
                         { name: 'Jamie', score: 914, wins: 3, losses: 9, rank: 13 },
                     ]);
                     expect(res.body.deltas).to.be.an('array').with.deep.members([14,19]);
+                });
+            });
+        });
+        describe('with invalid req.body (seasonUpdateOptions)', function () {
+            describe('(missing \'season\' field)', function () {
+                const seasonUpdateOptions = {
+                    games: [
+                        {
+                            namesOfWinners: ['Craig'],
+                            namesOfLosers: ['Richard'],
+                        },
+                    ],
+                }
+                it('returns 400 and text explaining how req was invalid', async function () {
+                    const res = await app()
+                        .put('/seasons')
+                        .send(seasonUpdateOptions);
+                    expect(res.status).to.equal(400);
+                    expect(res.text).to.equal('Error while validating request: request.body should have required property \'season\'');
+                });
+            });
+            describe('(missing \'games\' field)', function () {
+                const seasonUpdateOptions = {
+                    season: {
+                        seasonName: 'Pool Season 1',
+                        players: [
+                            { name: 'Craig', score: 1000, wins: 0, losses: 0, rank: 1 },
+                            { name: 'Richard', score: 1000, wins: 0, losses: 0, rank: 1 },
+                        ],
+                    },
+                }
+                it('returns 400 and text explaining how req was invalid', async function () {
+                    const res = await app()
+                        .put('/seasons')
+                        .send(seasonUpdateOptions);
+                    expect(res.status).to.equal(400);
+                    expect(res.text).to.equal('Error while validating request: request.body should have required property \'games\'');
                 });
             });
         });

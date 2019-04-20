@@ -5,10 +5,9 @@ const path = require('path');
 const fs = require('fs-extra');
 
 const { syncOpenApi2and3Docs } = require('../utils');
+const { pathToDocsDir } = require('../config');
 
 const router = express.Router();
-
-const pathToDocsDir = path.join(__dirname, '../../public/docs');
 
 let openApiDocs = {};
 try {
@@ -38,14 +37,13 @@ router.route('/openApi/raw/2')
     .get((req, res) => {
         res.json(openApiDocs.v2);
     })
-    .put(async (req, res) => {
+    .put(async (req, res, next) => {
         try {
             await syncOpenApi2and3Docs();
             openApiDocs.v2 = fs.readJsonSync(path.join(pathToDocsDir, 'openApi2.json'));
             res.status(200).json(openApiDocs.v2);
         } catch (error) {
-            console.log(error);
-            res.status(500).send(error);
+            next(error);
         }
     });
 

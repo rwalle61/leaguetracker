@@ -64,39 +64,99 @@ paths:
           $ref: '#/components/responses/404NotFound'
   /seasons:
     post:
-        tags:
-            - users
-        summary: Create a new season
-        requestBody:
-            description: season creation options
-            required: true
-            content:
-                application/json:
-                    schema:
-                        type: object
-                        properties:
-                            seasonName:
-                                type: string
-                            playersOptions:
-                                type: array
-                                items:
-                                    $ref: '#/components/schemas/Player'
-        responses:
-            '201':
-                description: Season created
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                seasonName:
-                                    type: string
-                                players:
-                                    type: array
-                                    items:
-                                        $ref: '#/components/schemas/Player'
-            '400':
-                description: Bad input parameter
+      tags:
+        - users
+      summary: Create a new season
+      requestBody:
+        description: season creation options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seasonName:
+                  type: string
+                playersOptions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PlayerOptions'
+      responses:
+        '201':
+          description: Season created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  seasonName:
+                    type: string
+                  players:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Player'
+        '400':
+          description: Bad input parameter
+    put:
+      tags:
+        - users
+      summary: Update a season
+      requestBody:
+        description: season update options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - season
+                - games
+              properties:
+                season:
+                  type: object
+                  properties:
+                    seasonName:
+                      type: string
+                    players:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Player'
+                games:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      namesOfWinners:
+                        type: array
+                        items:
+                          type: string
+                      namesOfLosers:
+                        type: array
+                        items:
+                          type: string
+      responses:
+        '200':
+          description: Season updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  season:
+                    type: object
+                    properties:
+                      seasonName:
+                        type: string
+                      players:
+                        type: array
+                        items:
+                            $ref: '#/components/schemas/Player'
+                  deltas:
+                    type: array
+                    items:
+                      type: integer
+        '400':
+            description: Bad input parameter
   /api-docs:
     get:
       summary: Get this API's docs
@@ -138,6 +198,29 @@ components:
         - score
         - wins
         - losses
+      properties:
+        id:
+          $ref: '#/components/schemas/ID'
+        name:
+          type: string
+          example: Craig Forrest
+        score:
+          type: integer
+          example: 990
+        wins:
+          type: integer
+          example: 0
+        losses:
+          type: integer
+          example: 1
+    PlayerOptions:
+      type: object
+      required:
+        # - id
+        - name
+        # - score
+        # - wins
+        # - losses
       properties:
         id:
           $ref: '#/components/schemas/ID'
