@@ -11,8 +11,8 @@ assignees: ''
 - Proposed gain:
 - Proposed cost: time
 - Alternative methods of achieving the gain (and why they're not as good as this method): 
-    - 
-    -
+    1.
+    2.
 
 Progress:
 - [ ] 
