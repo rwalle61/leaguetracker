@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node src/app.js",
     "test": "NODE_ENV=staging mocha test --recursive --exit",
-    "test-coverage": "nyc npm test; nyc check-coverage --statements 90 --lines 90 --functions 90 --branches 80; nyc report --reporter=html; open coverage/index.html",
+    "test-coverage": "nyc npm test; nyc check-coverage --statements 90 --lines 90 --functions 90 --branches 80; nyc report --reporter=html",
     "dev": "NODE_ENV=development nodemon src/app.js",
     "debug": "NODE_ENV=development node --inspect src/app.js",
     "deploy": "gcloud app deploy",
