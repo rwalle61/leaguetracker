@@ -4,21 +4,28 @@ const YAML = require('yamljs');
 const path = require('path');
 const fs = require('fs-extra');
 
-const { syncOpenApi2and3Docs } = require('../utils');
+const { syncOpenApi2and3Docs, logError } = require('../utils');
 const { pathToDocsDir } = require('../config');
 
 const router = express.Router();
 
-let openApiDocs = {};
-try {
-    openApiDocs.v2 = fs.readJsonSync(path.join(pathToDocsDir, 'openApi2.json'));
-} catch (error) {
-    openApiDocs.v2 = { error: 'unavailable' };
-}
-try {
-    openApiDocs.v3 = YAML.load(path.join(pathToDocsDir, 'openApi3.yml'));
-} catch (error) {
-    openApiDocs.v3 = { error: 'unavailable' };
+const openApiDocs = loadOpenApiDocs();
+
+function loadOpenApiDocs() {
+    let openApiDocs = {};
+    try {
+        openApiDocs.v2 = fs.readJsonSync(path.join(pathToDocsDir, 'openApi2.json'));
+    } catch (error) {
+        logError(error);
+        openApiDocs.v2 = { error: 'unavailable' };
+    }
+    try {
+        openApiDocs.v3 = YAML.load(path.join(pathToDocsDir, 'openApi3.yml'));
+    } catch (error) {
+        logError(error);
+        openApiDocs.v3 = { error: 'unavailable' };
+    }
+    return openApiDocs;
 }
 
 router.get('/', (req, res) => {
