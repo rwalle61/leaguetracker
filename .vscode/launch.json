@@ -8,16 +8,19 @@
             // Usage: run 'npm run debug', then hit 'Start Debugging'.
             "type": "node",
             "request": "attach",
-            "name": "Attach",
+            "name": "Attach while running locally",
             // "port": 9229 // default, so don't need to specify
-
-            /* For debugging app remotely, while deployed (on gCloud). See https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_remote-debugging
-            "address": "TCP/IP address of process to be debugged",
-            "port": "9229",
-            "localRoot": "${workspaceFolder}",
-            "remoteRoot": "C:\\Users\\John\\project\\server"
-            */
         },
+        // {
+        //     "type": "node",
+        //     "request": "attach",
+        //     "name": "Attach while running on gCloud",
+        //     // See https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_remote-debugging
+        //     "address": "TCP/IP address of process to be debugged", // http://leaguetracker.appspot.com/
+        //     "port": "9229",
+        //     "localRoot": "${workspaceFolder}",
+        //     "remoteRoot": "C:\\Users\\John\\project\\server"
+        // },
         {
             // Usage: just hit 'Start Debugging'.
             "type": "node",
