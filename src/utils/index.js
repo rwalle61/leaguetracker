@@ -4,11 +4,6 @@ const fs = require('fs-extra');
 
 const { pathToDocsDir } = require('../config');
 
-function typeOf(variable) {
-    if (Array.isArray(variable)) return 'array';
-    return typeof variable;
-}
-
 async function syncOpenApi2and3Docs() {
     // write an OpenApi 2 Doc from our existing OpenApi 3 Doc
     const convertedJson = await Converter.convert({
@@ -25,7 +20,17 @@ async function syncOpenApi2and3Docs() {
     );
 }
 
+function logError(err) {
+    // console.log({
+    //     error: {
+    //         name: err.name,
+    //         message: err.message,
+    //         // data: err.data,
+    //     },
+    // });
+}
+
 module.exports = {
-    typeOf,
     syncOpenApi2and3Docs,
+    logError,
 };
