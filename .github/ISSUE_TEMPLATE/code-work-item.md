@@ -7,16 +7,17 @@ assignees: ''
 
 ---
 
-Mission:
-- Current user story:
-- Proposed gain:
-- Proposed cost: time
-- Alternative ways to achieve the gain (and why they're not as good as this method) 
+### Mission:
+- **Current user story:**
+- **Proposed gain:**
+- **Proposed cost:** Time.
+- **Alternative ways to achieve the gain (and why they're not as good as this method):**
     1.
     2. 
     
-Progress:
-- [ ] plan
+### Progress:
+
+- [ ] plan/research
 - [ ] doc
 - [ ] write automated tests
 - [ ] implement
