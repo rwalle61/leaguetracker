@@ -20,6 +20,7 @@ Progress:
 - [ ] doc
 - [ ] write automated tests
 - [ ] implement
+- [ ] tidy/refactor
 - [ ] PR
 - [ ] re-deploy
 
