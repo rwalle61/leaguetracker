@@ -47,7 +47,6 @@ paths:
       parameters:
         - in: path
           name: id
-          # description: pass a required player id
           required: true
           schema:
             $ref: '#/components/schemas/ID'
@@ -87,14 +86,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  seasonName:
-                    type: string
-                  players:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Player'
+                $ref: '#/components/schemas/Season'
         '400':
           description: Bad input parameter
     put:
@@ -113,27 +105,11 @@ paths:
                 - games
               properties:
                 season:
-                  type: object
-                  properties:
-                    seasonName:
-                      type: string
-                    players:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/Player'
+                  $ref: '#/components/schemas/Season'
                 games:
                   type: array
                   items:
-                    type: object
-                    properties:
-                      namesOfWinners:
-                        type: array
-                        items:
-                          type: string
-                      namesOfLosers:
-                        type: array
-                        items:
-                          type: string
+                    $ref: '#/components/schemas/PastGame'
       responses:
         '200':
           description: Season updated
@@ -150,13 +126,13 @@ paths:
                       players:
                         type: array
                         items:
-                            $ref: '#/components/schemas/Player'
+                          $ref: '#/components/schemas/Player'
                   deltas:
                     type: array
                     items:
                       type: integer
         '400':
-            description: Bad input parameter
+          description: Bad input parameter
   /api-docs:
     get:
       summary: Get this API's docs
@@ -165,16 +141,16 @@ paths:
           description: Got this API's docs
   /api-docs/openApi/raw:
     get:
-      summary: Get this API's OAS as JSON
+      summary: Get this API's OAS(3) as JSON
       responses:
         '200':
-          description: Got this API's OAS as JSON
+          description: Got this API's OAS(3) as JSON
   /api-docs/openApi/raw/3:
     get:
-      summary: Get this API's OAS as JSON
+      summary: Get this API's OAS3 as JSON
       responses:
         '200':
-          description: Got this API's OAS as JSON
+          description: Got this API's OAS3 as JSON
   /api-docs/openApi/raw/2:
     get:
       summary: Get this API's OAS2 as JSON
@@ -190,6 +166,15 @@ paths:
           description: Synced this API's OAS2 with its OAS3
 components:
   schemas:
+    Season:
+      type: object
+      properties:
+        seasonName:
+          type: string
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
     Player:
       type: object
       required:
@@ -202,8 +187,7 @@ components:
         id:
           $ref: '#/components/schemas/ID'
         name:
-          type: string
-          example: Craig Forrest
+          $ref: '#/components/schemas/PlayerName'
         score:
           type: integer
           example: 990
@@ -216,17 +200,10 @@ components:
     PlayerOptions:
       type: object
       required:
-        # - id
         - name
-        # - score
-        # - wins
-        # - losses
       properties:
-        id:
-          $ref: '#/components/schemas/ID'
         name:
-          type: string
-          example: Craig Forrest
+          $ref: '#/components/schemas/PlayerName'
         score:
           type: integer
           example: 990
@@ -236,10 +213,35 @@ components:
         losses:
           type: integer
           example: 1
+    PlayerName:
+      type: string
+      example: Craig Forrest
     ID:
       type: string
       # format: uuid
       # example: d290f1ee-6c54-4b01-90e6-d701748f0851
+    PastGame:
+      type: object
+      properties:
+        namesOfWinners:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayerName'
+        namesOfLosers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayerName'
+    Fixture:
+      type: object
+      properties:
+        namesOfTeam1:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayerName'
+        namesOfTeam2:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayerName'
   responses:
     404NotFound:
       description: The specified resource was not found.
