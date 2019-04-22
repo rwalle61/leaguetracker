@@ -45,10 +45,10 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Got this API's OAS as JSON"
+            "description": "Got this API's OAS(3) as JSON"
           }
         },
-        "summary": "Get this API's OAS as JSON"
+        "summary": "Get this API's OAS(3) as JSON"
       }
     },
     "/api-docs/openApi/raw/2": {
@@ -79,10 +79,10 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Got this API's OAS as JSON"
+            "description": "Got this API's OAS3 as JSON"
           }
         },
-        "summary": "Get this API's OAS as JSON"
+        "summary": "Get this API's OAS3 as JSON"
       }
     },
     "/players": {
@@ -175,18 +175,7 @@
           "201": {
             "description": "Season created",
             "schema": {
-              "properties": {
-                "players": {
-                  "items": {
-                    "$ref": "#/definitions/Player"
-                  },
-                  "type": "array"
-                },
-                "seasonName": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
+              "$ref": "#/definitions/Season"
             }
           },
           "400": {
@@ -215,37 +204,12 @@
               "properties": {
                 "games": {
                   "items": {
-                    "properties": {
-                      "namesOfLosers": {
-                        "items": {
-                          "type": "string"
-                        },
-                        "type": "array"
-                      },
-                      "namesOfWinners": {
-                        "items": {
-                          "type": "string"
-                        },
-                        "type": "array"
-                      }
-                    },
-                    "type": "object"
+                    "$ref": "#/definitions/PastGame"
                   },
                   "type": "array"
                 },
                 "season": {
-                  "properties": {
-                    "players": {
-                      "items": {
-                        "$ref": "#/definitions/Player"
-                      },
-                      "type": "array"
-                    },
-                    "seasonName": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
+                  "$ref": "#/definitions/Season"
                 }
               },
               "required": [
@@ -297,8 +261,42 @@
     }
   },
   "definitions": {
+    "Fixture": {
+      "properties": {
+        "namesOfTeam1": {
+          "items": {
+            "$ref": "#/definitions/PlayerName"
+          },
+          "type": "array"
+        },
+        "namesOfTeam2": {
+          "items": {
+            "$ref": "#/definitions/PlayerName"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ID": {
       "type": "string"
+    },
+    "PastGame": {
+      "properties": {
+        "namesOfLosers": {
+          "items": {
+            "$ref": "#/definitions/PlayerName"
+          },
+          "type": "array"
+        },
+        "namesOfWinners": {
+          "items": {
+            "$ref": "#/definitions/PlayerName"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
     },
     "Player": {
       "properties": {
@@ -310,8 +308,7 @@
           "type": "integer"
         },
         "name": {
-          "example": "Craig Forrest",
-          "type": "string"
+          "$ref": "#/definitions/PlayerName"
         },
         "score": {
           "example": 990,
@@ -330,18 +327,18 @@
       ],
       "type": "object"
     },
+    "PlayerName": {
+      "example": "Craig Forrest",
+      "type": "string"
+    },
     "PlayerOptions": {
       "properties": {
-        "id": {
-          "$ref": "#/definitions/ID"
-        },
         "losses": {
           "example": 1,
           "type": "integer"
         },
         "name": {
-          "example": "Craig Forrest",
-          "type": "string"
+          "$ref": "#/definitions/PlayerName"
         },
         "score": {
           "example": 990,
@@ -355,6 +352,20 @@
       "required": [
         "name"
       ],
+      "type": "object"
+    },
+    "Season": {
+      "properties": {
+        "players": {
+          "items": {
+            "$ref": "#/definitions/Player"
+          },
+          "type": "array"
+        },
+        "seasonName": {
+          "type": "string"
+        }
+      },
       "type": "object"
     }
   },

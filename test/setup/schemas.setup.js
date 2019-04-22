@@ -10,8 +10,8 @@ const { expect } = require('./chai.setup');
 const validator = new ZSchema({});
 
 const pathToApiSpec = path.join(__dirname, '../../public/docs/openApi3.yml');
-const apiSpec = yaml.safeLoad(fs.readFileSync(pathToApiSpec));
-const openApiSchemas = apiSpec.components.schemas;
+const openApiSpec = yaml.safeLoad(fs.readFileSync(pathToApiSpec));
+const openApiSchemas = openApiSpec.components.schemas;
 
 const jsonSchemas = convertOpenApiSchemasToJsonSchemas(openApiSchemas);
 
