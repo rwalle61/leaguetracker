@@ -39,6 +39,7 @@
     "openapi-schema-to-json-schema": "^2.2.0",
     "sinon": "^7.3.2",
     "sinon-chai": "^3.3.0",
+    "rewire": "^4.0.1",
     "swagger-parser": "^6.0.5",
     "z-schema": "^4.0.2"
   },
