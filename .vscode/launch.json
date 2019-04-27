@@ -31,8 +31,11 @@
                 "--timeout",
                 "999999", // timeout length. Required since while debugging we may pause for longer than Mocha's test timeout
                 "--colors",
-                "'${workspaceFolder}/{,!(node_modules)/}*/*.test.js'"
+                "'${workspaceFolder}/test/**/*.test.js'",
             ],
+            "env": {
+                "NODE_ENV": "development",
+            },
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
