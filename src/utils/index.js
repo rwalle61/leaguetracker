@@ -2,7 +2,7 @@ const Converter = require('api-spec-converter');
 const path = require('path');
 const fs = require('fs-extra');
 
-const { pathToDocsDir } = require('../config');
+const { pathToDocsDir, logLevel } = require('../config');
 
 async function syncOpenApi2and3Docs() {
     // write an OpenApi 2 Doc from our existing OpenApi 3 Doc
@@ -21,13 +21,15 @@ async function syncOpenApi2and3Docs() {
 }
 
 function logError(err) {
-    // console.log({
-    //     error: {
-    //         name: err.name,
-    //         message: err.message,
-    //         // data: err.data,
-    //     },
-    // });
+    if (logLevel === 'debug') {
+        console.log({
+            error: {
+                name: err.name,
+                message: err.message,
+                // data: err.data,
+            },
+        });
+    }
 }
 
 module.exports = {
