@@ -1,22 +1,20 @@
-function calculateProbabilityOfWin(team1Score, team2Score) {
+function calculateWinProbability(team1Score, team2Score) {
+    if (isNaN(team1Score) || isNaN(team2Score)) throw TypeError(`both ${team1Score} and ${team2Score} must be numbers`);
     const exponent = (team2Score - team1Score) / 400;
     return 1 / (1 + 10 ** exponent);
 }
 
 function calculateDelta(winnersTeamScore, losersTeamScore) {
-    const expectedProbability = calculateProbabilityOfWin(winnersTeamScore, losersTeamScore);
-
-    const delta = Math.round(32 * (1 - expectedProbability));
-
+    const winProbability = calculateWinProbability(winnersTeamScore, losersTeamScore);
+    const delta = Math.round(32 * (1 - winProbability));
     return Math.max(delta, 1);
 }
 
 function calculateTeamScore(players) {
-    const total = players
+    const sumOfPlayersScores = players
         .map(player => player.score)
         .reduce((subtotal, score) => subtotal + score);
-
-    return total / players.length;
+    return sumOfPlayersScores / players.length;
 }
 
 function updatePlayers(game) {
@@ -39,7 +37,7 @@ function updatePlayers(game) {
     const players = [...winners, ...losers]
     return {
         players,
-        delta
+        delta,
     };
 }
 
