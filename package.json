@@ -36,6 +36,7 @@
     "nodemon": "^1.18.10",
     "nyc": "^14.0.0",
     "openapi-schema-to-json-schema": "^2.2.0",
+    "rewire": "^4.0.1",
     "swagger-parser": "^6.0.5",
     "z-schema": "^4.0.2"
   },
