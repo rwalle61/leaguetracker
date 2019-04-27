@@ -6,7 +6,7 @@ const { syncOpenApi2and3Docs, logError } = require('../../../src/utils');
 
 const { expect } = require('../../setup/chai.setup');
 
-describe('index.test.js', function () {
+describe('utils/index.js', function () {
     const pathToDocsDir = path.join(__dirname, '../../../public/docs');
 
     describe('syncOpenApi2and3Docs()', function () {
