@@ -2,12 +2,12 @@ const rewire = require('rewire');
 
 const { expect } = require('../../setup/chai.setup');
 
-const _module = rewire('../../../src/services/elo.service');
+const eloService = rewire('../../../src/services/elo.service');
 
-const calculateWinProbability = _module.__get__('calculateWinProbability');
-const calculateDelta = _module.__get__('calculateDelta');
-const calculateTeamScore = _module.__get__('calculateTeamScore');
-const updatePlayers = _module.__get__('updatePlayers');
+const calculateWinProbability = eloService.__get__('calculateWinProbability');
+const calculateDelta = eloService.__get__('calculateDelta');
+const calculateTeamScore = eloService.__get__('calculateTeamScore');
+const updatePlayers = eloService.__get__('updatePlayers');
 
 describe('elo.service.test.js', function () {
     describe('calculateWinProbability(team1Score, team2Score)', function () {
