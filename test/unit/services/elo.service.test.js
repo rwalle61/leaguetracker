@@ -108,7 +108,7 @@ describe('elo.service.test.js', function () {
     });
     describe('calculateTeamScore(players)', function () {
         describe('valid args', function () {
-            describe('[playerWithScore2000]', function () {
+            describe('[playerWithScore:2000]', function () {
                 it('returns 2000', function () {
                     const players = [
                         createPlayer({ score: 2000 }),
@@ -117,7 +117,7 @@ describe('elo.service.test.js', function () {
                     expect(result).to.equal(2000);
                 });
             });
-            describe('[playerWithScore2000, playerWithScore2000]', function () {
+            describe('[playerWithScore:2000, playerWithScore:2000]', function () {
                 it('returns 2000', function () {
                     const players = [
                         createPlayer({ score: 2000 }),
@@ -127,7 +127,7 @@ describe('elo.service.test.js', function () {
                     expect(result).to.equal(2000);
                 });
             });
-            describe('[playerWithScore0, playerWithScore2000]', function () {
+            describe('[playerWithScore:0, playerWithScore:2000]', function () {
                 it('returns 1000', function () {
                     const players = [
                         createPlayer({ score: 0 }),
@@ -137,7 +137,7 @@ describe('elo.service.test.js', function () {
                     expect(result).to.equal(1000);
                 });
             });
-            describe('[playerWithScore-1000, playerWithScore0]', function () {
+            describe('[playerWithScore:-1000, playerWithScore:0]', function () {
                 it('returns -500', function () {
                     const players = [
                         createPlayer({ score: -1000 }),
@@ -150,21 +150,21 @@ describe('elo.service.test.js', function () {
         });
         describe('invalid args', function () {
             describe('missing', function () {
-                it('throws an error', function () {
+                it('throws a TypeError', function () {
                     const func = () => calculateTeamScore();
-                    expect(func).to.throw();
+                    expect(func).to.throw(TypeError);
                 });
             });
             describe('invalid type (String, not an array)', function () {
-                it('throws an error', function () {
+                it('throws a TypeError', function () {
                     const func = () => calculateTeamScore('String, not an array');
-                    expect(func).to.throw();
+                    expect(func).to.throw(TypeError);
                 });
             });
             describe('invalid type ({})', function () {
-                it('throws an error', function () {
+                it('throws a TypeError', function () {
                     const func = () => calculateTeamScore({});
-                    expect(func).to.throw();
+                    expect(func).to.throw(TypeError);
                 });
             });
             describe('missing players', function () {
@@ -205,15 +205,15 @@ describe('elo.service.test.js', function () {
         });
         describe('invalid args', function () {
             describe('missing', function () {
-                it('throws an error', function () {
+                it('throws a TypeError', function () {
                     const func = () => updatePlayers();
-                    expect(func).to.throw();
+                    expect(func).to.throw(TypeError);
                 });
             });
             describe('invalid type (String, not an object)', function () {
-                it('throws an error', function () {
+                it('throws a TypeError', function () {
                     const func = () => updatePlayers('String, not an object');
-                    expect(func).to.throw();
+                    expect(func).to.throw(TypeError);
                 });
             });
             describe('missing field (winners)', function () {
