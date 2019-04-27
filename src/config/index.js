@@ -1,8 +1,10 @@
 
 const path = require('path');
 
+/* istanbul ignore next */
 const env = process.env.NODE_ENV || 'development';
 
+/* istanbul ignore next */
 function determineLogLevel(env) {
     if (env === 'production' || env === 'staging') {
         return 'info';

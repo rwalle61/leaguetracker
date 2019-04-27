@@ -1,8 +1,8 @@
 const chai = require('chai');
-const chaiHttp = require('chai-http');
-const chaiThings = require('chai-things');
-
-chai.use(chaiHttp);
-chai.use(chaiThings);
+[
+    require('chai-http'),
+    require('chai-things'),
+    require('sinon-chai'),
+].map(plugin => chai.use(plugin));
 
 module.exports = chai;
