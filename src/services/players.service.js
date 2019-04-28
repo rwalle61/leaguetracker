@@ -2,7 +2,7 @@ const players = require('../data/players');
 
 const getPlayers = () => players;
 
-const getPlayer = name => getPlayers().find(player => player.name === name);
+const getPlayer = (name) => getPlayers().find(player => player.name === name);
 
 function createPlayer({
     name,
