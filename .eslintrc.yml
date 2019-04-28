@@ -10,10 +10,17 @@ rules:
     - warn
     - 4
     - SwitchCase: 1
+  quotes:
+    - warn
+    - single
+    - allowTemplateLiterals: true
+  semi:
+    - error
+    - always
   no-console: off
   no-plusplus:
-   - error
-   - allowForLoopAfterthoughts: true
+    - error
+    - allowForLoopAfterthoughts: true
   no-use-before-define:
     - error
     - functions: false
@@ -29,4 +36,4 @@ rules:
 
 parserOptions:
   ecmaVersion: 2018
-  sourceType: "module"
+  sourceType: module
