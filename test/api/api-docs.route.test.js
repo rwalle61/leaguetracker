@@ -1,7 +1,6 @@
-const SwaggerParser = require('swagger-parser');
-
 const app = require('../setup/app.setup');
 const { expect } = require('../setup/chai.setup');
+const { validateOAS3, validateOAS2 } = require('../test-helpers/openapi.helper');
 
 describe('/api-docs', function () {
     describe('GET', function () {
@@ -65,15 +64,3 @@ describe('/api-docs', function () {
         });
     });
 });
-
-async function validateOAS3(openApiSpec) {
-    expect(openApiSpec.openapi).to.equal('3.0.0');
-    const validatedSpec = await SwaggerParser.validate(openApiSpec);
-    expect(validatedSpec.openapi).to.equal('3.0.0');
-}
-
-async function validateOAS2(openApiSpec) {
-    expect(openApiSpec.swagger).to.equal('2.0');
-    const validatedSpec = await SwaggerParser.validate(openApiSpec);
-    expect(validatedSpec.swagger).to.equal('2.0');
-}
