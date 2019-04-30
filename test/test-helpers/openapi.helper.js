@@ -7,7 +7,7 @@ const { expect } = require('../setup/chai.setup');
 
 const openApiSpec = yaml.safeLoad(fs.readFileSync(pathToApiSpec));
 
-SwaggerParser.validate(openApiSpec); // TODO handle potential promise rejections
+SwaggerParser.validate(openApiSpec); // TODO handle this potential promise rejection
 
 const openApiSchemas = openApiSpec.components.schemas;
 
