@@ -48,6 +48,34 @@ describe('/seasons', function () {
         });
 
         describe('with invalid req.body (seasonCreationOptions)', function () {
+            describe(`missing 'playersOptions' field`, function () {
+                it('returns 400 and text explaining how req was invalid', async function () {
+                    const seasonCreationOptions = {
+                        seasonName: 'Pool Season 1',
+                    };
+                    const res = await app()
+                        .post('/seasons')
+                        .send(seasonCreationOptions);
+                    expect(res.status).to.equal(400);
+                    expect(res.text).to.equal('Error while validating request: request.body should have required property \'playersOptions\'');
+                });
+            });
+            describe(`missing 'seasonName' field`, function () {
+                it('returns 400 and text explaining how req was invalid', async function () {
+                    const seasonCreationOptions = {
+                        playersOptions: [
+                            {
+                                name: ['Craig'],
+                            },
+                        ],
+                    };
+                    const res = await app()
+                        .post('/seasons')
+                        .send(seasonCreationOptions);
+                    expect(res.status).to.equal(400);
+                    expect(res.text).to.equal('Error while validating request: request.body should have required property \'seasonName\'');
+                });
+            });
             describe('(playersOptions.name should be a String, but is instead an array)', function () {
                 it('returns 400 and text explaining how req was invalid', async function () {
                     const seasonCreationOptions = {
