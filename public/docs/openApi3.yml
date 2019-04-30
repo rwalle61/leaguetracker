@@ -60,7 +60,7 @@ paths:
         '400':
           description: Bad input parameter
         '404':
-          $ref: '#/components/responses/404NotFound'
+          $ref: '#/components/responses/404'
   /seasons:
     post:
       tags:
@@ -68,11 +68,13 @@ paths:
       summary: Create a new season
       requestBody:
         description: season creation options
-        required: true
         content:
           application/json:
             schema:
               type: object
+              required:
+                - seasonName
+                - playersOptions
               properties:
                 seasonName:
                   type: string
@@ -243,5 +245,5 @@ components:
           items:
             $ref: '#/components/schemas/PlayerName'
   responses:
-    404NotFound:
+    404:
       description: The specified resource was not found.

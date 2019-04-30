@@ -154,7 +154,6 @@
             "description": "season creation options",
             "in": "body",
             "name": "body",
-            "required": true,
             "schema": {
               "properties": {
                 "playersOptions": {
@@ -167,6 +166,10 @@
                   "type": "string"
                 }
               },
+              "required": [
+                "seasonName",
+                "playersOptions"
+              ],
               "type": "object"
             }
           }
@@ -381,7 +384,7 @@
   ],
   "x-components": {
     "responses": {
-      "404NotFound": {
+      "404": {
         "description": "The specified resource was not found."
       }
     }
