@@ -18,7 +18,7 @@ describe('/players', function () {
 
     describe('/{id}', function () {
         describe('GET', function () {
-            describe('with valid req.params.id (playerName)', function () {
+            describe(`with valid 'id' param`, function () {
                 const playerName = 'Craig';
                 it('returns 200 and a body containing the player requested', async function () {
                     const res = await app().get(`/players/${playerName}`);
@@ -28,8 +28,8 @@ describe('/players', function () {
                     expect(res.body).to.deep.equal(expectedPlayer);
                 });
             });
-            describe('with invalid req.params.id (playerName)', function () {
-                describe('(player doesn\'t exist)', function () {
+            describe(`with invalid 'id' param`, function () {
+                describe('non-existent player', function () {
                     const playerName = 'Non-existent player';
                     it('returns 404 and text explaining the problem', async function () {
                         const res = await app().get(`/players/${playerName}`);
