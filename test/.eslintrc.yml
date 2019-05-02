@@ -5,9 +5,6 @@ env:
   mocha: true
 
 rules:
-  func-names: off
-  prefer-arrow-callback: off
-  mocha/prefer-arrow-callback: error
   mocha/no-mocha-arrows: error
   mocha/no-exclusive-tests: error
   mocha/no-async-describe: error

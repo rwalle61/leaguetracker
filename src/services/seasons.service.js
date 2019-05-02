@@ -12,7 +12,7 @@ function getPlayer(season, playerName) {
 function createSeason(creationOptions) {
     const { seasonName, playersOptions } = creationOptions;
     const players = playersOptions.map(
-        playerOptions => playersService.createPlayer(playerOptions.name, playerOptions.score)
+        playerOptions => playersService.createPlayer(playerOptions)
     );
     const rankedPlayers = assignPlayerRanks(players);
     const season = {
@@ -48,7 +48,7 @@ function updatePlayer(season, updatedPlayer) {
 
 function updateSeason(updateOptions) {
     const { season, games } = updateOptions;
-    const deltas = []
+    const deltas = [];
     games.forEach(game => {
         const { namesOfWinners, namesOfLosers } = game;
         const winners = namesOfWinners.map(name => getPlayer(season, name));
@@ -64,7 +64,7 @@ function updateSeason(updateOptions) {
             updatePlayer(season, player);
         });
     });
-    return { 
+    return {
         season,
         deltas,
     };
