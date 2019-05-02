@@ -9,7 +9,7 @@ const calculateDelta = eloService.__get__('calculateDelta');
 const calculateTeamScore = eloService.__get__('calculateTeamScore');
 const updatePlayers = eloService.__get__('updatePlayers');
 
-describe('elo.service.test.js', function () {
+describe('elo.service.js', function () {
     describe('calculateWinProbability(team1Score, team2Score)', function () {
         describe('valid args', function () {
             describe('2000, 2000', function () {
