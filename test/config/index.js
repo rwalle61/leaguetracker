@@ -1,5 +1,7 @@
-// const example = 'asdf';
+const path = require('path');
+
+const pathToApiSpec = path.join(__dirname, '../../public/docs/openApi3.yml');
 
 module.exports = {
-    // example,
+    pathToApiSpec,
 };

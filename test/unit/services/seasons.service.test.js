@@ -1,6 +1,6 @@
 
 const { expect } = require('../../setup/chai.setup');
-const { jsonSchemas, fitsSchema } = require('../../setup/schemas.setup');
+const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
 
 const seasonsService = require('../../../src/services/seasons.service');
 
