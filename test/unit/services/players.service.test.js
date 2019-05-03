@@ -1,7 +1,7 @@
 const rewire = require('rewire');
 
 const { expect } = require('../../setup/chai.setup');
-const { jsonSchemas, fitsSchema } = require('../../setup/schemas.setup');
+const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
 
 const playersService = rewire('../../../src/services/players.service');
 

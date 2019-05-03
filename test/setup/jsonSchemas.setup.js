@@ -1,17 +1,11 @@
-const path = require('path');
-const fs = require('fs-extra');
-const yaml = require('js-yaml');
 const toJsonSchema = require('openapi-schema-to-json-schema');
 const ZSchema = require('z-schema');
 const util = require('util');
 
+const { openApiSchemas } = require('../test-helpers/openapi.helper');
 const { expect } = require('./chai.setup');
 
 const validator = new ZSchema({});
-
-const pathToApiSpec = path.join(__dirname, '../../public/docs/openApi3.yml');
-const openApiSpec = yaml.safeLoad(fs.readFileSync(pathToApiSpec));
-const openApiSchemas = openApiSpec.components.schemas;
 
 const jsonSchemas = convertOpenApiSchemasToJsonSchemas(openApiSchemas);
 
