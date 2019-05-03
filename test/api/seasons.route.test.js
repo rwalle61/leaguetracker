@@ -202,7 +202,7 @@ describe('/seasons', function () {
                             namesOfLosers: ['Richard'],
                         },
                     ],
-                }
+                };
                 it('returns 400 and text explaining how req was invalid', async function () {
                     const res = await app()
                         .put('/seasons')
@@ -220,7 +220,7 @@ describe('/seasons', function () {
                             { name: 'Richard', score: 1000, wins: 0, losses: 0, rank: 1 },
                         ],
                     },
-                }
+                };
                 it('returns 400 and text explaining how req was invalid', async function () {
                     const res = await app()
                         .put('/seasons')

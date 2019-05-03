@@ -2,15 +2,16 @@ const playersService = require('./players.service');
 const eloService = require('./elo.service');
 
 function getPlayers(season) {
+    if (!season.players) throw new TypeError();
     return season.players;
 }
 
 function getPlayer(season, playerName) {
+    if (typeof playerName !== 'string') throw new TypeError();
     return getPlayers(season).find(player => player.name === playerName);
 }
 
-function createSeason(creationOptions) {
-    const { seasonName, playersOptions } = creationOptions;
+function createSeason({ seasonName, playersOptions }) {
     const players = playersOptions.map(
         playerOptions => playersService.createPlayer(playerOptions)
     );
@@ -46,8 +47,7 @@ function updatePlayer(season, updatedPlayer) {
     season.players[playerIndex] = updatedPlayer;
 }
 
-function updateSeason(updateOptions) {
-    const { season, games } = updateOptions;
+function updateSeason({ season, games }) {
     const deltas = [];
     games.forEach(game => {
         const { namesOfWinners, namesOfLosers } = game;

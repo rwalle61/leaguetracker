@@ -5,7 +5,7 @@ const { expect } = require('../../setup/chai.setup');
 const reqValidator = rewire('../../../src/middleware/reqValidator');
 const getRouteInOpenapiFormat = reqValidator.__get__('getRouteInOpenapiFormat');
 
-describe('reqValidator.test.js', function () {
+describe('reqValidator.js', function () {
     describe('getRouteInOpenapiFormat(req)', function () {
         describe('valid args', function () {
             describe('req.route.path = \'/\'', function () {

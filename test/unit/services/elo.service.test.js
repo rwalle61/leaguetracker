@@ -9,30 +9,30 @@ const calculateDelta = eloService.__get__('calculateDelta');
 const calculateTeamScore = eloService.__get__('calculateTeamScore');
 const updatePlayers = eloService.__get__('updatePlayers');
 
-describe('elo.service.test.js', function () {
+describe('elo.service.js', function () {
     describe('calculateWinProbability(team1Score, team2Score)', function () {
         describe('valid args', function () {
             describe('2000, 2000', function () {
                 it('returns 0.5', function () {
-                    const result = calculateWinProbability(2000, 2000)
+                    const result = calculateWinProbability(2000, 2000);
                     expect(result).to.equal(0.5);
                 });
             });
             describe('100, 100', function () {
                 it('returns 0.5', function () {
-                    const result = calculateWinProbability(100, 100)
+                    const result = calculateWinProbability(100, 100);
                     expect(result).to.equal(0.5);
                 });
             });
             describe('2000, 1900', function () {
                 it('returns ~0.64005', function () {
-                    const result = calculateWinProbability(2000, 1900)
+                    const result = calculateWinProbability(2000, 1900);
                     expect(result).to.be.closeTo(0.64005, 0.0001);
                 });
             });
             describe('0, 0', function () {
                 it('returns 0.5', function () {
-                    const result = calculateWinProbability(0, 0)
+                    const result = calculateWinProbability(0, 0);
                     expect(result).to.equal(0.5);
                 });
             });
