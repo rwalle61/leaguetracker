@@ -1,7 +1,9 @@
 const path = require('path');
 
-const pathToApiSpec = path.join(__dirname, '../../public/docs/openApi3.yml');
+const pathToDocsDir = path.join(__dirname, '../../docs');
+const pathToApiSpec = path.join(pathToDocsDir, 'openApi3.yml');
 
 module.exports = {
+    pathToDocsDir,
     pathToApiSpec,
 };

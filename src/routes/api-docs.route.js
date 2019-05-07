@@ -27,7 +27,7 @@ function loadOpenApiDocs() {
 }
 
 router.get('/', (req, res) => {
-    res.sendFile(path.join(pathToDocsDir, 'redoc.html'));
+    res.sendFile(path.join(pathToDocsDir, 'index.html'));
 });
 
 router.get('/openApi/raw', (req, res) => {
