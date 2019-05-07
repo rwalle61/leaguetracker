@@ -17,13 +17,11 @@ function loadOpenApiDocs() {
         openApiDocs.v2 = fs.readJsonSync(path.join(pathToDocsDir, 'openApi2.json'));
     } catch (error) {
         logError(error);
-        openApiDocs.v2 = { error: 'unavailable' };
     }
     try {
         openApiDocs.v3 = YAML.load(path.join(pathToDocsDir, 'openApi3.yml'));
     } catch (error) {
         logError(error);
-        openApiDocs.v3 = { error: 'unavailable' };
     }
     return openApiDocs;
 }
@@ -40,19 +38,18 @@ router.get('/openApi/raw/3', (req, res) => {
     res.json(openApiDocs.v3);
 });
 
-router.route('/openApi/raw/2')
-    .get((req, res) => {
-        res.json(openApiDocs.v2);
-    })
-    .put(async (req, res, next) => {
+router.get('/openApi/raw/2', async (req, res, next) => {
+    if (!openApiDocs.v2) {
         try {
             await syncOpenApi2and3Docs();
             openApiDocs.v2 = fs.readJsonSync(path.join(pathToDocsDir, 'openApi2.json'));
-            res.status(200).json(openApiDocs.v2);
         } catch (error) {
+            error.statusCode = 404;
             next(error);
         }
-    });
+    }
+    res.json(openApiDocs.v2);
+});
 
 const swaggerUiOptions = {
     // explorer: true,
