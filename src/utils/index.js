@@ -1,6 +1,7 @@
 const Converter = require('api-spec-converter');
 const path = require('path');
 const fs = require('fs-extra');
+const YAML = require('yamljs');
 
 const { pathToDocsDir, logLevel } = require('../config');
 
@@ -22,6 +23,14 @@ async function syncOpenApi2and3Docs() {
     );
 }
 
+function getOAS2() {
+    return fs.readJsonSync(path.join(pathToDocsDir, 'openApi2.json'));
+}
+
+function getOAS3() {
+    return YAML.load(path.join(pathToDocsDir, 'openApi3.yml'));
+}
+
 function logError(err) {
     if (logLevel === 'debug') {
         console.log({
@@ -37,4 +46,6 @@ function logError(err) {
 module.exports = {
     syncOpenApi2and3Docs,
     logError,
+    getOAS2,
+    getOAS3,
 };
