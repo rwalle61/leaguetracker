@@ -15,7 +15,7 @@ describe('/seasons', function () {
                         ],
                     };
                     const res = await app()
-                        .post('/seasons')
+                        .post('/api/v1/seasons')
                         .send(seasonCreationOptions);
                     expect(res.status).to.equal(201);
                     expect(res.body.seasonName).to.equal(seasonCreationOptions.seasonName);
@@ -35,7 +35,7 @@ describe('/seasons', function () {
                         ],
                     };
                     const res = await app()
-                        .post('/seasons')
+                        .post('/api/v1/seasons')
                         .send(seasonCreationOptions);
                     expect(res.status).to.equal(201);
                     expect(res.body.seasonName).to.equal(seasonCreationOptions.seasonName);
@@ -54,7 +54,7 @@ describe('/seasons', function () {
                         seasonName: 'Pool Season 1',
                     };
                     const res = await app()
-                        .post('/seasons')
+                        .post('/api/v1/seasons')
                         .send(seasonCreationOptions);
                     expect(res.status).to.equal(400);
                     expect(res.text).to.equal('Error while validating request: request.body should have required property \'playersOptions\'');
@@ -70,7 +70,7 @@ describe('/seasons', function () {
                         ],
                     };
                     const res = await app()
-                        .post('/seasons')
+                        .post('/api/v1/seasons')
                         .send(seasonCreationOptions);
                     expect(res.status).to.equal(400);
                     expect(res.text).to.equal('Error while validating request: request.body should have required property \'seasonName\'');
@@ -87,7 +87,7 @@ describe('/seasons', function () {
                         ],
                     };
                     const res = await app()
-                        .post('/seasons')
+                        .post('/api/v1/seasons')
                         .send(seasonCreationOptions);
                     expect(res.status).to.equal(400);
                     expect(res.text).to.equal('Error while validating request: request.body.playersOptions[0].name should be string');
@@ -113,7 +113,7 @@ describe('/seasons', function () {
                         },
                     ];
                     const res = await app()
-                        .put('/seasons')
+                        .put('/api/v1/seasons')
                         .send({ season, games });
                     expect(res.status).to.equal(200);
                     expect(res.body.season.seasonName).to.equal(season.seasonName);
@@ -142,7 +142,7 @@ describe('/seasons', function () {
                         },
                     ];
                     const res = await app()
-                        .put('/seasons')
+                        .put('/api/v1/seasons')
                         .send({ season, games });
                     expect(res.status).to.equal(200);
                     expect(res.body.season.seasonName).to.equal(season.seasonName);
@@ -170,7 +170,7 @@ describe('/seasons', function () {
                         ],
                     };
                     const res = await app()
-                        .put('/seasons')
+                        .put('/api/v1/seasons')
                         .send(seasonUpdateOptions);
                     expect(res.status).to.equal(200);
                     expect(res.body.season.seasonName).to.equal(seasonUpdateOptions.season.seasonName);
@@ -205,7 +205,7 @@ describe('/seasons', function () {
                 };
                 it('returns 400 and text explaining how req was invalid', async function () {
                     const res = await app()
-                        .put('/seasons')
+                        .put('/api/v1/seasons')
                         .send(seasonUpdateOptions);
                     expect(res.status).to.equal(400);
                     expect(res.text).to.equal('Error while validating request: request.body should have required property \'season\'');
@@ -223,7 +223,7 @@ describe('/seasons', function () {
                 };
                 it('returns 400 and text explaining how req was invalid', async function () {
                     const res = await app()
-                        .put('/seasons')
+                        .put('/api/v1/seasons')
                         .send(seasonUpdateOptions);
                     expect(res.status).to.equal(400);
                     expect(res.text).to.equal('Error while validating request: request.body should have required property \'games\'');

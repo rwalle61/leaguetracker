@@ -11,7 +11,7 @@ syncOpenApi2and3Docs();
 const app = express();
 
 app.use(bodyParser.json());
-app.use('/', v1Routes);
+app.use('/api/v1/', v1Routes);
 app.use(middleware.errorHandler.handleErrors);
 
 app.listen(port, () => {

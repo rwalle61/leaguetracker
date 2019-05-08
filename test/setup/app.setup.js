@@ -7,6 +7,6 @@ module.exports = () => chai.request(app);
 Usage:
 
 const app = require('../setup/app.setup');
-const res = await app().get('/');
+const res = await app().get('/api/v1/');
 
 */
