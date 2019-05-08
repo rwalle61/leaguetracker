@@ -1,5 +1,5 @@
 const playersService = require('./players.service');
-const eloService = require('./elo.service');
+const eloService = require('../../common/services/elo.service');
 
 function getPlayers(season) {
     if (!season.players) throw new TypeError();

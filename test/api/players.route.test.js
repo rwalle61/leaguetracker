@@ -1,4 +1,4 @@
-const players = require('../../src/data/players');
+const players = require('../../src/v1/data/players');
 const app = require('../setup/app.setup');
 const { expect } = require('../setup/chai.setup');
 const { jsonSchemas, fitsSchema } = require('../setup/jsonSchemas.setup');

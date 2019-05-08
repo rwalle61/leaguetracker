@@ -29,12 +29,12 @@ function updatePlayers(game) {
         player.score += delta;
         player.wins += 1;
     });
-
     losers.forEach((player) => {
         player.score -= delta;
         player.losses += 1;
     });
-    const players = [...winners, ...losers]
+    
+    const players = [...winners, ...losers];
     return {
         players,
         delta,

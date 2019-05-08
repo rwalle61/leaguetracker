@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { seasonsController } = require('../controllers');
-const { validateReq } = require('../middleware/reqValidator');
+const { validateReq } = require('../../common/middleware/reqValidator');
 
 const router = express.Router();
 

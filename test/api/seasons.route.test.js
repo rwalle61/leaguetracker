@@ -1,4 +1,4 @@
-const season1 = require('../../src/data/season.1');
+const season1 = require('../../src/v1/data/season.1');
 const app = require('../setup/app.setup');
 const { expect } = require('../setup/chai.setup');
 
