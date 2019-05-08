@@ -1,11 +1,11 @@
 
-const { expect } = require('../../setup/chai.setup');
-const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
+const { expect } = require('../../../setup/chai.setup');
+const { jsonSchemas, fitsSchema } = require('../../../setup/jsonSchemas.setup');
 
-const seasonsService = require('../../../src/services/seasons.service');
+const seasonsService = require('../../../../src/v1/services/seasons.service');
 
-const season1 = require('../../../src/data/season.1');
-const expectedPlayers = require('../../../src/data/players');
+const season1 = require('../../../../src/v1/data/season.1');
+const expectedPlayers = require('../../../../src/v1/data/players');
 
 describe('seasons.service.js', function () {
     describe('getPlayer(season, playerName)', function () {

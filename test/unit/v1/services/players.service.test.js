@@ -1,9 +1,9 @@
 const rewire = require('rewire');
 
-const { expect } = require('../../setup/chai.setup');
-const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
+const { expect } = require('../../../setup/chai.setup');
+const { jsonSchemas, fitsSchema } = require('../../../setup/jsonSchemas.setup');
 
-const playersService = rewire('../../../src/services/players.service');
+const playersService = rewire('../../../../src/v1/services/players.service');
 
 const getPlayers = playersService.__get__('getPlayers');
 const getPlayer = playersService.__get__('getPlayer');

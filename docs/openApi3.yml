@@ -25,7 +25,7 @@ paths:
       responses:
         '200':
           description: App healthy
-  /players:
+  /api/v1/players:
     get:
       tags:
         - users
@@ -39,7 +39,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Player'
-  /players/{id}:
+  /api/v1/players/{id}:
     get:
       tags:
         - users
@@ -61,7 +61,7 @@ paths:
           description: Bad input parameter
         '404':
           $ref: '#/components/responses/404'
-  /seasons:
+  /api/v1/seasons:
     post:
       tags:
         - users
@@ -135,25 +135,25 @@ paths:
                       type: integer
         '400':
           description: Bad input parameter
-  /api-docs:
+  /api/v1/api-docs:
     get:
       summary: Get this API's docs
       responses:
         '200':
           description: Got this API's docs
-  /api-docs/openApi/raw:
+  /api/v1/api-docs/openApi/raw:
     get:
       summary: Get this API's OAS(3) as JSON
       responses:
         '200':
           description: Got this API's OAS(3) as JSON
-  /api-docs/openApi/raw/3:
+  /api/v1/api-docs/openApi/raw/3:
     get:
       summary: Get this API's OAS3 as JSON
       responses:
         '200':
           description: Got this API's OAS3 as JSON
-  /api-docs/openApi/raw/2:
+  /api/v1/api-docs/openApi/raw/2:
     get:
       summary: Get this API's OAS2 as JSON
       responses:
