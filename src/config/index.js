@@ -14,6 +14,6 @@ function determineLogLevel(env) {
 
 module.exports = {
     ...require(`./${env}`), // eslint-disable-line import/no-dynamic-require
-    pathToDocsDir: path.join(__dirname, '../../public/docs'),
+    pathToDocsDir: path.join(__dirname, '../../docs'),
     logLevel: determineLogLevel(env),
 };

@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const routes = require('./routes');
 const middleware = require('./middleware');
 const { port } = require('./config');
+const { syncOpenApi2and3Docs } = require('./utils');
+
+syncOpenApi2and3Docs();
 
 const app = express();
 

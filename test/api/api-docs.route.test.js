@@ -1,6 +1,6 @@
 const app = require('../setup/app.setup');
 const { expect } = require('../setup/chai.setup');
-const { validateOAS3, validateOAS2 } = require('../test-helpers/openapi.helper');
+const { validateOAS3, validateOAS2, deleteOAS2, readDocsDir } = require('../test-helpers/openapi.helper');
 
 describe('/api-docs', function () {
     describe('GET', function () {
@@ -41,21 +41,13 @@ describe('/api-docs', function () {
             });
             describe('/2', function () {
                 describe('GET', function () {
-                    before('synchronise OpenAPI 2 doc with OpenAPI 3 doc', async function() {
-                        const res = await app().put('/api-docs/openApi/raw/2');
-                        expect(res.status).to.equal(200);
-                        await validateOAS2(res.body);
+                    before(`even if we're missing our OAS2`, function() {
+                        deleteOAS2();
+                        const entries = readDocsDir();
+                        expect(entries).to.not.include('openApi2.json');
                     });
-
                     it('returns 200 and a valid OpenAPI 2 doc in JSON form', async function () {
                         const res = await app().get('/api-docs/openApi/raw/2');
-                        expect(res.status).to.equal(200);
-                        await validateOAS2(res.body);
-                    });
-                });
-                describe('PUT', function () {
-                    it('returns 200 and an OpenAPI 2 doc in JSON form', async function () {
-                        const res = await app().put('/api-docs/openApi/raw/2');
                         expect(res.status).to.equal(200);
                         await validateOAS2(res.body);
                     });
