@@ -1,8 +1,8 @@
 const rewire = require('rewire');
 
-const { expect } = require('../../setup/chai.setup');
+const { expect } = require('../../../setup/chai.setup');
 
-const eloService = rewire('../../../src/common/services/elo.service');
+const eloService = rewire('../../../../src/common/services/elo.service');
 
 const calculateWinProbability = eloService.__get__('calculateWinProbability');
 const calculateDelta = eloService.__get__('calculateDelta');

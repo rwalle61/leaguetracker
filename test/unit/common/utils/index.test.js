@@ -1,9 +1,9 @@
 require('mocha-sinon'); // auto-calls this.sinon.restore() afterEach test block
 
-const { syncOpenApi2and3Docs, logError } = require('../../../src/common/utils');
+const { syncOpenApi2and3Docs, logError } = require('../../../../src/common/utils');
 
-const { expect } = require('../../setup/chai.setup');
-const { validateOAS2, deleteOAS2, readDocsDir, getOAS2File } = require('../../test-helpers/openapi.helper');
+const { expect } = require('../../../setup/chai.setup');
+const { validateOAS2, deleteOAS2, readDocsDir, getOAS2File } = require('../../../test-helpers/openapi.helper');
 
 describe('utils/index.test.js', function () {
     describe('syncOpenApi2and3Docs()', function () {

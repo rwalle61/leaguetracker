@@ -1,8 +1,8 @@
 const rewire = require('rewire');
 
-const { expect } = require('../../setup/chai.setup');
+const { expect } = require('../../../setup/chai.setup');
 
-const reqValidator = rewire('../../../src/common/middleware/reqValidator');
+const reqValidator = rewire('../../../../src/common/middleware/reqValidator');
 const getRouteInOpenapiFormat = reqValidator.__get__('getRouteInOpenapiFormat');
 
 describe('reqValidator.js', function () {
