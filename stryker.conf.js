@@ -20,6 +20,6 @@ module.exports = function(config) {
         transpilers: [],
         testFramework: 'mocha',
         coverageAnalysis: 'perTest',
-        thresholds: { high: 95, low: 70, break: 70 },
+        thresholds: { high: 95, low: 80, break: 80 },
     });
 };
