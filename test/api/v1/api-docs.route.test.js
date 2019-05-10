@@ -11,6 +11,7 @@ describe('/api/v1', function () {
                 expect(res.text).to.include('<title>LeagueTracker Docs</title>');
                 expect(res.text).to.include('<redoc');
                 expect(res.text).to.include('</redoc>');
+                // Note: the DOM may still error. See https://github.com/rwalle61/leaguetracker/issues/83
             });
         });
         describe('/swagger', function () {
