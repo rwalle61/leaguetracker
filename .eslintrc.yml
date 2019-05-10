@@ -17,7 +17,7 @@ rules:
   semi:
     - error
     - always
-  no-console: off
+  no-console: 0
   no-plusplus:
     - error
     - allowForLoopAfterthoughts: true
@@ -35,6 +35,9 @@ rules:
     - always-multiline
   require-await:
     - error
+  no-unused-vars:
+    - error
+    - argsIgnorePattern: next
 
 parserOptions:
   ecmaVersion: 2018
