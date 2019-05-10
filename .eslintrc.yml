@@ -33,6 +33,8 @@ rules:
   comma-dangle:
     - error
     - always-multiline
+  require-await:
+    - error
 
 parserOptions:
   ecmaVersion: 2018
