@@ -19,8 +19,18 @@
 </head>
 
 <body>
-    <!-- we provide the specification here -->
-    <redoc spec-url='/docs/openApi3.yml' expand-responses="all"></redoc>
+    <!-- Link to openAPI spec here.
+
+        To host spec on GH pages:
+        GH pages hosts the docs dir at https://rwalle61.github.io/leaguetracker/
+        Absolute paths (/) start at https://rwalle61.github.io/
+        Relative paths (./)start at https://rwalle61.github.io/leaguetracker/
+        Thus, both './openApi3.yml' and '/leaguetracker/openApi3.yml' work.
+        We've opted for the former in case the latter leads to problems hosting static files at './'
+
+        Thus, to host spec at route api/vx/api-docs/, express.static() in app.js must match the above
+     -->
+    <redoc spec-url='./openApi3.yml' expand-responses="all"></redoc>
     <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
 </body>
 
