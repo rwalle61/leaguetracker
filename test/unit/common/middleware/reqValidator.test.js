@@ -9,7 +9,7 @@ describe('reqValidator.js', function () {
     describe('getRouteInOpenapiFormat(req)', function () {
         describe('valid args', function () {
             describe('req.route.path = \'/\'', function () {
-                it('returns an empty string', async function () {
+                it('returns an empty string', function () {
                     const req = {
                         route: {
                             path: '/',
@@ -20,7 +20,7 @@ describe('reqValidator.js', function () {
                 });
             });
             describe('req.route.path = \'/{id}\'', function () {
-                it('return /{id}', async function () {
+                it('return /{id}', function () {
                     const req = {
                         route: {
                             path: '/:id',
