@@ -25,7 +25,7 @@ describe('utils/index.test.js', function () {
     });
 
     describe('logError(err)', function () {
-        it('logs the correct error info to console', async function () {
+        it('logs the correct error info to console', function () {
             const spy = this.sinon.spy(console, 'log');
             logError(new TypeError('errMsg'));
 

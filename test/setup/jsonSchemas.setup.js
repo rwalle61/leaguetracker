@@ -67,10 +67,10 @@ function extractProperties(obj, keys) {
             newObj[key] = value;
         }
     }
-    return newObj
+    return newObj;
 }
 
 module.exports = {
     jsonSchemas,
     fitsSchema,
-}
+};
