@@ -10,7 +10,7 @@ syncOpenApi2and3Docs();
 
 const app = express();
 
-app.use('/docs', express.static('docs'));
+app.use('/api/v1/api-doc/', express.static('docs'));
 
 app.use(bodyParser.json());
 app.use('/api/v1/', v1Routes);
