@@ -5,7 +5,7 @@ const { syncOpenApi2and3Docs, logError } = require('../../../../src/common/utils
 const { expect } = require('../../../setup/chai.setup');
 const { validateOAS2, deleteOAS2, readDocsDir, getOAS2File } = require('../../../test-helpers/openapi.helper');
 
-describe('utils/index.test.js', function () {
+describe('utils/index.js', function () {
     describe('syncOpenApi2and3Docs()', function () {
 
         before('check that we have an OAS3 (OpenAPI Spec v3)', function() {
