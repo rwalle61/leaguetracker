@@ -2,6 +2,7 @@ const Converter = require('api-spec-converter');
 const path = require('path');
 const fs = require('fs-extra');
 const YAML = require('yamljs');
+const util = require('util');
 
 const { pathToDocsDir, logLevel } = require('../config');
 
@@ -43,9 +44,24 @@ function logError(err) {
     }
 }
 
+/**
+ * Don't use for:
+ * - Date objects,
+ * - objects with properties that are functions,
+ * - see https://stackoverflow.com/questions/7914968/cloning-whats-the-fastest-alternative-to-json-parsejson-stringifyx
+ */
+function deepClone(obj) {
+    try {
+        return JSON.parse(JSON.stringify(obj));
+    } catch (error) {
+        throw new TypeError(`Could not clone obj '${util.inspect(obj)}'`);
+    }
+}
+
 module.exports = {
     syncOpenApi2and3Docs,
     logError,
     getOAS2,
     getOAS3,
+    deepClone,
 };

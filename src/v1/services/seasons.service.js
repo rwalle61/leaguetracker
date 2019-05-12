@@ -1,5 +1,6 @@
 const playersService = require('./players.service');
 const eloService = require('../../common/services/elo.service');
+const { deepClone } = require('../../common/utils');
 
 function getPlayers(season) {
     if (!season.players) throw new TypeError();
@@ -15,7 +16,7 @@ function createSeason({ seasonName, playersOptions }) {
     const players = playersOptions.map(
         playerOptions => playersService.createPlayer(playerOptions)
     );
-    const rankedPlayers = assignPlayerRanks(players);
+    const rankedPlayers = rankPlayers(players);
     const season = {
         seasonName,
         players: rankedPlayers,
@@ -23,8 +24,8 @@ function createSeason({ seasonName, playersOptions }) {
     return season;
 }
 
-function assignPlayerRanks(players) {
-    const playersCopy = [...players];
+function rankPlayers(players) {
+    const playersCopy = deepClone(players);
     const sortedPlayers = playersCopy.sort((player1, player2) => (player2.score - player1.score));
     let scoreOfPreviousPlayer;
     let rankOfPreviousPlayer;
@@ -47,6 +48,10 @@ function updatePlayer(season, updatedPlayer) {
     season.players[playerIndex] = updatedPlayer;
 }
 
+function updateSeasonWithPlayers(season, players) {
+    return players.forEach(player => updatePlayer(season, player));
+}
+
 function updateSeason({ season, games }) {
     const deltas = [];
     games.forEach(game => {
@@ -56,18 +61,12 @@ function updateSeason({ season, games }) {
 
         const { players, delta } = eloService.updatePlayers({ winners, losers });
         deltas.push(delta);
-        players.forEach((player) => {
-            updatePlayer(season, player);
-        });
-        const rankedPlayers = assignPlayerRanks(season.players);
-        rankedPlayers.map((player) => {
-            updatePlayer(season, player);
-        });
+
+        updateSeasonWithPlayers(season, players);
+        const rankedPlayers = rankPlayers(season.players);
+        updateSeasonWithPlayers(season, rankedPlayers);
     });
-    return {
-        season,
-        deltas,
-    };
+    return { season, deltas };
 }
 
 module.exports = {

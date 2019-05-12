@@ -1,3 +1,5 @@
+const { deepClone } = require('../../common/utils');
+
 function calculateWinProbability(team1Score, team2Score) {
     if (isNaN(team1Score) || isNaN(team2Score)) throw TypeError(`both ${team1Score} and ${team2Score} must be numbers`);
     const exponent = (team2Score - team1Score) / 400;
@@ -18,7 +20,7 @@ function calculateTeamScore(players) {
 }
 
 function updatePlayers(game) {
-    const { winners, losers } = game;
+    const { winners, losers } = deepClone(game);
 
     const winnersScore = calculateTeamScore(winners);
     const losersScore = calculateTeamScore(losers);
@@ -33,7 +35,7 @@ function updatePlayers(game) {
         player.score -= delta;
         player.losses += 1;
     });
-    
+
     const players = [...winners, ...losers];
     return {
         players,
