@@ -1,6 +1,6 @@
 const Knex = require('knex')(require('../../../knexfile'));
 
-const seasons = require('../../../seeds/seasons');
+const seasons = require('./data/seasons.data');
 
 const app = require('../../setup/app.setup');
 
@@ -24,7 +24,7 @@ describe('/api/v2', function () {
                 for (const member of res.body) {
                     expect(fitsSchema(member, jsonSchemas.Season)).to.be.true;
                 }
-                expect(res.body).to.deep.equal(seasons.data);
+                expect(res.body).to.deep.equal(seasons.seed);
             });
         });
     });

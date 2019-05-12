@@ -1,6 +1,6 @@
 const Knex = require('knex')(require('../../../knexfile'));
 
-const leagues = require('../../../seeds/leagues');
+const leagues = require('./data/leagues.data');
 
 const app = require('../../setup/app.setup');
 
@@ -24,7 +24,7 @@ describe('/api/v2', function () {
                 for (const member of res.body) {
                     expect(fitsSchema(member, jsonSchemas.Season)).to.be.true;
                 }
-                expect(res.body).to.deep.equal(leagues.data);
+                expect(res.body).to.deep.equal(leagues.seed);
             });
         });
     });
