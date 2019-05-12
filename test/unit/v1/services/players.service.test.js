@@ -27,6 +27,13 @@ describe('players.service.js', function () {
                     expect(result).to.deep.include({ name: 'Craig' });
                 });
             });
+            describe('Richard', function () {
+                it(`returns the player 'Richard'`, function () {
+                    const result = getPlayer('Richard');
+                    expect(fitsSchema(result, jsonSchemas.Player)).to.be.true;
+                    expect(result).to.deep.include({ name: 'Richard' });
+                });
+            });
         });
     });
     describe('createPlayer(name, score, wins, losses)', function() {
