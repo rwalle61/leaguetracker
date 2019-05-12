@@ -168,9 +168,9 @@ describe('elo.service.js', function () {
                 });
             });
             describe('missing players', function () {
-                it('throws an error', function () {
+                it('throws a TypeError', function () {
                     const func = () => calculateTeamScore([]);
-                    expect(func).to.throw();
+                    expect(func).to.throw(TypeError);
                 });
             });
         });
@@ -217,27 +217,27 @@ describe('elo.service.js', function () {
                 });
             });
             describe('missing field (winners)', function () {
-                it('throws an error', function () {
+                it('throws a TypeError', function () {
                     const game = { losers: createSampleLosers() };
                     const func = () => updatePlayers(game);
-                    expect(func).to.throw();
+                    expect(func).to.throw(TypeError);
                 });
             });
             describe('missing field (losers)', function () {
-                it('throws an error', function () {
+                it('throws a TypeError', function () {
                     const game = { winners: createSampleWinners() };
                     const func = () => updatePlayers(game);
-                    expect(func).to.throw();
+                    expect(func).to.throw(TypeError);
                 });
             });
             describe('missing players', function () {
-                it('throws an error', function () {
+                it('throws a TypeError', function () {
                     const game = {
                         winners: createSampleWinners(),
                         losers: [],
                     };
                     const func = () => updatePlayers(game);
-                    expect(func).to.throw();
+                    expect(func).to.throw(TypeError);
                 });
             });
             function createSampleWinners() {
