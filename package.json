@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node src/app.js",
-    "test": "NODE_ENV=staging mocha test --recursive --exit",
+    "test:base": "mocha test --recursive --exit",
+    "test": "pg_ctl -D /usr/local/var/postgres start; npm run test:base; pg_ctl -D /usr/local/var/postgres stop",
     "test:coverage": "nyc npm test && nyc report --reporter=html && nyc check-coverage --statements 92 --branches 85 --functions 95 --lines 92",
     "test:coverage:browse": "npm run test:coverage; open coverage/index.html",
     "test:unit": "stryker run",
@@ -54,11 +55,15 @@
   "dependencies": {
     "api-spec-converter": "^2.8.1",
     "body-parser": "^1.18.3",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "express-openapi-validate": "^0.4.4",
     "fs-extra": "^7.0.1",
     "js-yaml": "^3.13.1",
+    "knex": "^0.16.5",
+    "objection": "^1.6.8",
     "path": "^0.12.7",
+    "pg": "^7.11.0",
     "swagger-ui-express": "^4.0.2",
     "yamljs": "^0.3.0"
   },

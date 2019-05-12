@@ -261,6 +261,73 @@
         ],
         "summary": "Update a season"
       }
+    },
+    "/api/v2/leagues": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Got leagues info",
+            "schema": {
+              "$ref": "#/definitions/League"
+            }
+          },
+          "404": {
+            "description": "The specified resource was not found."
+          }
+        },
+        "tags": [
+          "leagues"
+        ],
+        "summary": "Get all leagues"
+      },
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Submitted league",
+            "schema": {
+              "$ref": "#/definitions/League"
+            }
+          },
+          "404": {
+            "description": "The specified resource was not found."
+          }
+        },
+        "tags": [
+          "leagues"
+        ],
+        "summary": "Add leagues"
+      }
+    },
+    "/api/v2/seasons": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Got seasons info",
+            "schema": {
+              "$ref": "#/definitions/Season"
+            }
+          },
+          "404": {
+            "description": "The specified resource was not found."
+          }
+        },
+        "tags": [
+          "seasons"
+        ],
+        "summary": "Get all seasons"
+      }
     }
   },
   "definitions": {
@@ -283,6 +350,17 @@
     },
     "ID": {
       "type": "string"
+    },
+    "League": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "leagueName": {
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "PastGame": {
       "properties": {

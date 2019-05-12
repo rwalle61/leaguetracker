@@ -2,4 +2,8 @@ node_modules
 **/.DS_Store
 .nyc_output
 coverage
+<<<<<<< HEAD
 stryker.log
+=======
+.env
+>>>>>>> add v2 routes and db connection

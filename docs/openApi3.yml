@@ -166,8 +166,57 @@ paths:
       responses:
         '200':
           description: Synced this API's OAS2 with its OAS3
+  /api/v2/leagues:
+    get:
+      tags:
+        - leagues
+      summary: Get all leagues
+      responses:
+        '200':
+          description: Got leagues info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/League'
+        '404':
+          $ref: '#/components/responses/404'
+    post:
+      tags:
+        - leagues
+      summary: Add leagues
+      responses:
+        '201':
+          description: Submitted league
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/League'
+        '404':
+          $ref: '#/components/responses/404'
+  /api/v2/seasons:
+    get:
+      tags:
+        - seasons
+      summary: Get all seasons
+      responses:
+        '200':
+          description: Got seasons info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Season'
+        '404':
+          $ref: '#/components/responses/404'
+
 components:
   schemas:
+    League:
+      type: object
+      properties:
+        leagueName:
+          type: string
+        description:
+          type: string
     Season:
       type: object
       properties:
