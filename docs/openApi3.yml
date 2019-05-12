@@ -207,6 +207,20 @@ paths:
                 $ref: '#/components/schemas/Season'
         '404':
           $ref: '#/components/responses/404'
+  /api/v2/players:
+    get:
+      tags:
+        - players
+      summary: Get all players
+      responses:
+        '200':
+          description: Got players info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '404':
+          $ref: '#/components/responses/404'
 
 components:
   schemas:
@@ -230,6 +244,13 @@ components:
           type: string
         leagues_id:
           type: integer
+    Player_v2:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
     Player:
       type: object
       required:

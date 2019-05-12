@@ -306,6 +306,29 @@
         "summary": "Add leagues"
       }
     },
+    "/api/v2/players": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Got players info",
+            "schema": {
+              "$ref": "#/definitions/Player"
+            }
+          },
+          "404": {
+            "description": "The specified resource was not found."
+          }
+        },
+        "tags": [
+          "players"
+        ],
+        "summary": "Get all players"
+      }
+    },
     "/api/v2/seasons": {
       "get": {
         "produces": [
@@ -436,6 +459,17 @@
       "required": [
         "name"
       ],
+      "type": "object"
+    },
+    "Player_v2": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "Season": {
