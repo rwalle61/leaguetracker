@@ -9,10 +9,12 @@ const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
 
 describe('/api/v2', function () {
     before(async function(){
+        this.timeout = 100000;
         await Knex.migrate.rollback();
         await Knex.migrate.latest();
     });
     beforeEach(async function() {
+        this.timeout = 100000;
         await Knex.seed.run();
     });
     describe('/seasons', function () {
