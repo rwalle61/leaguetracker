@@ -36,7 +36,7 @@ class Season extends Model {
                     minLength: 1,
                     maxLength: 255,
                 },
-                seasons_id: {
+                leagues_id: {
                     type: 'integer',
                 },
             },

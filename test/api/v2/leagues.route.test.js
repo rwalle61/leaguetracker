@@ -9,10 +9,12 @@ const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
 
 describe('/api/v2', function () {
     before(async function(){
+        this.timeout(10000);
         await Knex.migrate.rollback();
         await Knex.migrate.latest();
     });
     beforeEach(async function() {
+        this.timeout(10000);
         await Knex.seed.run();
     });
     describe('/leagues', function () {
@@ -22,7 +24,7 @@ describe('/api/v2', function () {
                 expect(res.status).to.equal(200);
                 expect(res.body).to.be.an('array');
                 for (const member of res.body) {
-                    expect(fitsSchema(member, jsonSchemas.Season)).to.be.true;
+                    expect(fitsSchema(member, jsonSchemas.League)).to.be.true;
                 }
                 expect(res.body).to.deep.equal(leagues.seed);
             });

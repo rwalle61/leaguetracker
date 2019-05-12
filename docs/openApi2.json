@@ -356,7 +356,10 @@
         "description": {
           "type": "string"
         },
-        "leagueName": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
           "type": "string"
         }
       },
@@ -437,13 +440,16 @@
     },
     "Season": {
       "properties": {
-        "players": {
-          "items": {
-            "$ref": "#/definitions/Player"
-          },
-          "type": "array"
+        "description": {
+          "type": "string"
         },
-        "seasonName": {
+        "id": {
+          "type": "integer"
+        },
+        "leagues_id": {
+          "type": "integer"
+        },
+        "name": {
           "type": "string"
         }
       },

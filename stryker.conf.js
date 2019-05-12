@@ -8,6 +8,8 @@ module.exports = function(config) {
             '!src/**/services/index.js',
             '!src/**/config/*.js',
             '!src/app.js',
+            '!src/v2/models/*.js',
+            '!src/v2/services/*.js',
         ],
         mutator: 'javascript',
         packageManager: 'npm',

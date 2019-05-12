@@ -213,19 +213,23 @@ components:
     League:
       type: object
       properties:
-        leagueName:
+        id:
+          type: integer
+        name:
           type: string
         description:
           type: string
     Season:
       type: object
       properties:
-        seasonName:
+        id:
+          type: integer
+        name:
           type: string
-        players:
-          type: array
-          items:
-            $ref: '#/components/schemas/Player'
+        description:
+          type: string
+        leagues_id:
+          type: integer
     Player:
       type: object
       required:

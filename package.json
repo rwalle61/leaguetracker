@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production node src/app.js",
     "test:base": "mocha test --recursive --exit",
     "test": "pg_ctl -D /usr/local/var/postgres start; npm run test:base; pg_ctl -D /usr/local/var/postgres stop",
-    "test:coverage": "nyc npm test && nyc report --reporter=html && nyc check-coverage --statements 92 --branches 85 --functions 95 --lines 92",
+    "test:coverage": "nyc npm run test:base && nyc report --reporter=html && nyc check-coverage --statements 92 --branches 85 --functions 95 --lines 92",
     "test:coverage:browse": "npm run test:coverage; open coverage/index.html",
     "test:unit": "stryker run",
     "test:full": "npm run lint && npm run test:coverage && npm run test:unit",
