@@ -9,14 +9,14 @@ const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
 
 describe('/api/v2', function () {
     before(function(){
-        console.log(process.env.DB_USER);
-        console.log(process.env.DB_HOST);
-        console.log(process.env.DB_HOST2);
-        console.log(process.env.DB_HOST3);
-        console.log(process.env.DB_PASSWORD);
-        console.log(process.env.DB_PORT);
-        console.log(process.env.DB_DATABASE);
-        console.log(process.env.DB_DATABASE2);
+        // console.log(process.env.DB_USER);
+        // console.log(process.env.DB_HOST);
+        // console.log(process.env.DB_HOST2);
+        // console.log(process.env.DB_HOST3);
+        // console.log(process.env.DB_PASSWORD);
+        // console.log(process.env.DB_PORT);
+        // console.log(process.env.DB_DATABASE);
+        // console.log(process.env.DB_DATABASE2);
         this.timeout(100000);
         // await Knex.migrate.rollback();
         // await Knex.migrate.latest();

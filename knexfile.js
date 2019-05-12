@@ -9,8 +9,8 @@ module.exports = {
         port: process.env.DB_PORT,
     },
     pool: {
-        // min: 0,
-        // max: 12,
+        min: 0,
+        max: 12,
         propagateCreateError: false,
     },
 };
