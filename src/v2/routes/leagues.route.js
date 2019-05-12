@@ -7,8 +7,13 @@ const router = express.Router();
 
 router.get('/', validateReq, async (req, res, next) => {
     try {
-        res.status(200).send(await leaguesService.getLeagues());
+        const leagues = await leaguesService.getLeagues();
+        console.log(leagues);
+        res.status(200).send(leagues);
+        console.log('NO err');
     } catch(err) {
+        console.log('err');
+        console.log(err);
         next(err);
     }
 });

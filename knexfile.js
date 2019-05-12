@@ -8,9 +8,10 @@ module.exports = {
         password: process.env.DB_PASSWORD,
         port: process.env.DB_PORT,
     },
-    pool: {
-        min: 0,
-        max: 12,
-        propagateCreateError: false,
-    },
+    debug: true,
+    // pool: {
+    //     min: 0,
+    //     max: 12,
+    //     propagateCreateError: false,
+    // },
 };
