@@ -28,6 +28,7 @@ describe('/api/v2', function () {
     describe('/leagues', function () {
         describe('GET', function () {
             it('returns 200 and a body listing all leagues', async function () {
+                this.timeout(100000);
                 const res = await app().get('/api/v2/leagues');
                 expect(res.status).to.equal(200);
                 expect(res.body).to.be.an('array');
