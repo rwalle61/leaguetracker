@@ -1,4 +1,4 @@
-const Knex = require('knex')(require('../../../knexfile'));
+// const Knex = require('knex')(require('../../../knexfile'));
 
 const seasons = require('./data/seasons.data');
 
@@ -8,15 +8,15 @@ const { expect } = require('../../setup/chai.setup');
 const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
 
 describe('/api/v2', function () {
-    before(async function(){
-        this.timeout(100000);
-        await Knex.migrate.rollback();
-        await Knex.migrate.latest();
-    });
-    beforeEach(async function() {
-        this.timeout(100000);
-        await Knex.seed.run();
-    });
+    // before(async function(){
+    //     this.timeout(100000);
+    //     // await Knex.migrate.rollback();
+    //     // await Knex.migrate.latest();
+    // });
+    // beforeEach(async function() {
+    //     this.timeout(100000);
+    //     // await Knex.seed.run();
+    // });
     describe('/seasons', function () {
         describe('GET', function () {
             it('returns 200 and a body listing all seasons', async function () {

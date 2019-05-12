@@ -1,4 +1,4 @@
-const Knex = require('knex')(require('../../../knexfile'));
+// const Knex = require('knex')(require('../../../knexfile'));
 
 const leagues = require('./data/leagues.data');
 
@@ -8,7 +8,7 @@ const { expect } = require('../../setup/chai.setup');
 const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
 
 describe('/api/v2', function () {
-    before(async function(){
+    before(function(){
         console.log(process.env.DB_USER);
         console.log(process.env.DB_HOST);
         console.log(process.env.DB_HOST2);
@@ -18,13 +18,13 @@ describe('/api/v2', function () {
         console.log(process.env.DB_DATABASE);
         console.log(process.env.DB_DATABASE2);
         this.timeout(100000);
-        await Knex.migrate.rollback();
-        await Knex.migrate.latest();
+        // await Knex.migrate.rollback();
+        // await Knex.migrate.latest();
     });
-    beforeEach(async function() {
-        this.timeout = 100000;
-        await Knex.seed.run();
-    });
+    // beforeEach(async function() {
+    //     // this.timeout = 100000;
+    //     // await Knex.seed.run();
+    // });
     describe('/leagues', function () {
         describe('GET', function () {
             it('returns 200 and a body listing all leagues', async function () {
