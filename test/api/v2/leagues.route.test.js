@@ -40,5 +40,32 @@ describe('/api/v2', function () {
                 });
             });
         });
+        describe('/{id}', function () {
+            describe('GET', function () {
+                describe(`with invalid 'id' param`, function () {
+                    describe('non-existent league', function () {
+                        it('returns 404 and text explaining the problem', async function () {
+                            const id = -1;
+                            const res = await app().get(`/api/v2/leagues/${id}`);
+                            expect(res.status).to.equal(404);
+                            expect(res.text).to.equal(`league ${id} not found`);
+                        });
+                    });
+                });
+            });
+        });
+        describe('/{id}', function () {
+            describe('DELETE', function () {
+                it('returns 204 and a GET on the deleted league returns 404', async function () {
+                    const deletableLeague = leagues.existingLeague;
+                    const id = deletableLeague.id;
+                    const resFromDelete = await app().delete(`/api/v2/leagues/${id}`);
+                    expect(resFromDelete.status).to.equal(204);
+                    const resFromGet = await app().get(`/api/v2/leagues/${id}`);
+                    expect(resFromGet.status).to.equal(404);
+                    expect(resFromGet.text).to.equal(`league ${id} not found`);
+                });
+            });
+        });
     });
 });
