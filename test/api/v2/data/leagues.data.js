@@ -18,8 +18,15 @@ const league4 = {
     name: 'league 4',
     description: 'descriptive league 4',
 };
+const updatableLeague = {
+    id: 1,
+    name: 'premier league 1',
+    description: 'premier descriptive league 1',
+};
+
 module.exports = {
     seed: [league1, league2, league3],
     existingLeague: league1,
     insertableLeague: league4,
+    updatableLeague,
 };

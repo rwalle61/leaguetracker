@@ -18,6 +18,7 @@ router.route('/')
 
 router.route('/:id')
     .get(leaguesController.getLeague)
-    .delete(leaguesController.deleteLeague);
+    .delete(leaguesController.deleteLeague)
+    .put(leaguesController.putLeague);
 
 module.exports = router;

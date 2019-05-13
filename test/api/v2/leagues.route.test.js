@@ -75,6 +75,20 @@ describe('/api/v2', function () {
                     expect(resFromGet.text).to.equal(`league ${id} not found`);
                 });
             });
+            describe('PUT', function () {
+                it('returns 204 and a GET on the updated league returns 200', async function () {
+                    const updatableLeague = leagues.updatableLeague;
+                    const id = updatableLeague.id;
+                    const resFromPut = await app()
+                        .put(`/api/v2/leagues/${id}`)
+                        .send(updatableLeague);
+                    expect(resFromPut.status).to.equal(204);
+
+                    const resFromGet = await app().get(`/api/v2/leagues/${id}`);
+                    expect(resFromGet.status).to.equal(200);
+                    expect(resFromGet.body).to.deep.equal(updatableLeague);
+                });
+            });
         });
     });
 });
