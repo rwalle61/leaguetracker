@@ -16,6 +16,16 @@ const getLeague = async function(req, res, next) {
     }
 };
 
+const postLeague = async function(req, res, next) {
+    try {
+        const league = req.body;
+        await leaguesService.postLeague(league);
+        res.status(201).send();
+    } catch(err) {
+        next(err);
+    }
+};
+
 const deleteLeague = async function(req, res, next) {
     try {
         const id = req.params.id;
@@ -29,5 +39,6 @@ const deleteLeague = async function(req, res, next) {
 module.exports = {
     getLeagues,
     getLeague,
+    postLeague,
     deleteLeague,
 };

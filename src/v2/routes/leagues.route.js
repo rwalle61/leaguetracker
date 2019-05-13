@@ -13,6 +13,9 @@ router.get('/', validateReq, async (req, res, next) => {
     }
 });
 
+router.route('/')
+    .post(leaguesController.postLeague);
+
 router.route('/:id')
     .get(leaguesController.getLeague)
     .delete(leaguesController.deleteLeague);

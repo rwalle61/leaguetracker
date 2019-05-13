@@ -29,6 +29,21 @@ describe('/api/v2', function () {
                 expect(res.body).to.deep.equal(leagues.seed);
             });
         });
+        describe('POST', function () {
+            it('returns 201 and a body listing a single league', async function () {
+                const insertableleague = leagues.insertableLeague;
+                const resAfterPost = await app()
+                    .post('/api/v2/leagues')
+                    .send(insertableleague);
+                expect(resAfterPost.status).to.equal(201);
+
+                const resAfterGet = await app()
+                    .get(`/api/v2/leagues/${insertableleague.id}`);
+                expect(resAfterGet.status).to.equal(200);
+                expect(fitsSchema(resAfterGet.body, jsonSchemas.League)).to.be.true;
+                expect(resAfterGet.body).to.deep.equal(insertableleague);
+            });
+        });
         describe('/{id}', function () {
             describe('GET', function () {
                 it('returns 200 and a body listing a single league', async function () {
@@ -38,10 +53,6 @@ describe('/api/v2', function () {
                     expect(fitsSchema(res.body, jsonSchemas.League)).to.be.true;
                     expect(res.body).to.deep.equal(expectedLeague);
                 });
-            });
-        });
-        describe('/{id}', function () {
-            describe('GET', function () {
                 describe(`with invalid 'id' param`, function () {
                     describe('non-existent league', function () {
                         it('returns 404 and text explaining the problem', async function () {
@@ -53,8 +64,6 @@ describe('/api/v2', function () {
                     });
                 });
             });
-        });
-        describe('/{id}', function () {
             describe('DELETE', function () {
                 it('returns 204 and a GET on the deleted league returns 404', async function () {
                     const deletableLeague = leagues.existingLeague;
