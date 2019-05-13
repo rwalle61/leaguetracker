@@ -15,4 +15,5 @@ const league3 = {
 };
 module.exports = {
     seed: [league1, league2, league3],
+    existingLeague: league1,
 };

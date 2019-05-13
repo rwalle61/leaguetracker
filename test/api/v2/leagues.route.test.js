@@ -29,5 +29,16 @@ describe('/api/v2', function () {
                 expect(res.body).to.deep.equal(leagues.seed);
             });
         });
+        describe('/{id}', function () {
+            describe('GET', function () {
+                it('returns 200 and a body listing a single league', async function () {
+                    const expectedLeague = leagues.existingLeague;
+                    const res = await app().get(`/api/v2/leagues/${expectedLeague.id}`);
+                    expect(res.status).to.equal(200);
+                    expect(fitsSchema(res.body, jsonSchemas.League)).to.be.true;
+                    expect(res.body).to.deep.equal(expectedLeague);
+                });
+            });
+        });
     });
 });

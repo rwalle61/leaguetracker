@@ -283,15 +283,24 @@
           "leagues"
         ],
         "summary": "Get all leagues"
-      },
-      "post": {
+      }
+    },
+    "/api/v2/leagues/{id}": {
+      "get": {
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
-          "201": {
-            "description": "Submitted league",
+          "200": {
+            "description": "Got league info",
             "schema": {
               "$ref": "#/definitions/League"
             }
@@ -301,9 +310,9 @@
           }
         },
         "tags": [
-          "leagues"
+          "league"
         ],
-        "summary": "Add leagues"
+        "summary": "Get a single league by id"
       }
     },
     "/api/v2/players": {

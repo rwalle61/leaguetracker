@@ -180,13 +180,20 @@ paths:
                 $ref: '#/components/schemas/League'
         '404':
           $ref: '#/components/responses/404'
-    post:
+  /api/v2/leagues/{id}:
+    get:
       tags:
-        - leagues
-      summary: Add leagues
+        - league
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      summary: Get a single league by id 
       responses:
-        '201':
-          description: Submitted league
+        '200':
+          description: Got league info
           content:
             application/json:
               schema:
