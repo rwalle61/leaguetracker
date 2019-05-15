@@ -16,4 +16,5 @@ module.exports = {
     ...require(`./${env}`), // eslint-disable-line import/no-dynamic-require
     pathToDocsDir: path.join(__dirname, '../../../docs'),
     logLevel: determineLogLevel(env),
+    env,
 };
