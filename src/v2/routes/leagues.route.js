@@ -1,16 +1,24 @@
 const express = require('express');
 
 const { validateReq } = require('../../common/middleware/reqValidator');
-const leaguesService = require('../services/leagues.service');
+const leaguesController = require('../controllers/leagues.controller');
 
 const router = express.Router();
 
 router.get('/', validateReq, async (req, res, next) => {
     try {
-        res.status(200).send(await leaguesService.getLeagues());
+        res.status(200).send(await leaguesController.getLeagues());
     } catch(err) {
         next(err);
     }
 });
+
+router.route('/')
+    .post(leaguesController.postLeague);
+
+router.route('/:id')
+    .get(leaguesController.getLeague)
+    .delete(leaguesController.deleteLeague)
+    .put(leaguesController.putLeague);
 
 module.exports = router;

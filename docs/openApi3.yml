@@ -180,13 +180,20 @@ paths:
                 $ref: '#/components/schemas/League'
         '404':
           $ref: '#/components/responses/404'
-    post:
+  /api/v2/leagues/{id}:
+    get:
       tags:
-        - leagues
-      summary: Add leagues
+        - league
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      summary: Get a single league by id 
       responses:
-        '201':
-          description: Submitted league
+        '200':
+          description: Got league info
           content:
             application/json:
               schema:
@@ -205,6 +212,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Season'
+        '404':
+          $ref: '#/components/responses/404'
+  /api/v2/players:
+    get:
+      tags:
+        - players
+      summary: Get all players
+      responses:
+        '200':
+          description: Got players info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
         '404':
           $ref: '#/components/responses/404'
 
@@ -230,6 +251,13 @@ components:
           type: string
         leagues_id:
           type: integer
+    Player_v2:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
     Player:
       type: object
       required:

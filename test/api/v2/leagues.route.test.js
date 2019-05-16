@@ -29,5 +29,66 @@ describe('/api/v2', function () {
                 expect(res.body).to.deep.equal(leagues.seed);
             });
         });
+        describe('POST', function () {
+            it('returns 201 and a body listing a single league', async function () {
+                const insertableleague = leagues.insertableLeague;
+                const resAfterPost = await app()
+                    .post('/api/v2/leagues')
+                    .send(insertableleague);
+                expect(resAfterPost.status).to.equal(201);
+
+                const resAfterGet = await app()
+                    .get(`/api/v2/leagues/${insertableleague.id}`);
+                expect(resAfterGet.status).to.equal(200);
+                expect(fitsSchema(resAfterGet.body, jsonSchemas.League)).to.be.true;
+                expect(resAfterGet.body).to.deep.equal(insertableleague);
+            });
+        });
+        describe('/{id}', function () {
+            describe('GET', function () {
+                it('returns 200 and a body listing a single league', async function () {
+                    const expectedLeague = leagues.existingLeague;
+                    const res = await app().get(`/api/v2/leagues/${expectedLeague.id}`);
+                    expect(res.status).to.equal(200);
+                    expect(fitsSchema(res.body, jsonSchemas.League)).to.be.true;
+                    expect(res.body).to.deep.equal(expectedLeague);
+                });
+                describe(`with invalid 'id' param`, function () {
+                    describe('non-existent league', function () {
+                        it('returns 404 and text explaining the problem', async function () {
+                            const id = -1;
+                            const res = await app().get(`/api/v2/leagues/${id}`);
+                            expect(res.status).to.equal(404);
+                            expect(res.text).to.equal(`league ${id} not found`);
+                        });
+                    });
+                });
+            });
+            describe('DELETE', function () {
+                it('returns 204 and a GET on the deleted league returns 404', async function () {
+                    const deletableLeague = leagues.existingLeague;
+                    const id = deletableLeague.id;
+                    const resFromDelete = await app().delete(`/api/v2/leagues/${id}`);
+                    expect(resFromDelete.status).to.equal(204);
+                    const resFromGet = await app().get(`/api/v2/leagues/${id}`);
+                    expect(resFromGet.status).to.equal(404);
+                    expect(resFromGet.text).to.equal(`league ${id} not found`);
+                });
+            });
+            describe('PUT', function () {
+                it('returns 204 and a GET on the updated league returns 200', async function () {
+                    const updatableLeague = leagues.updatableLeague;
+                    const id = updatableLeague.id;
+                    const resFromPut = await app()
+                        .put(`/api/v2/leagues/${id}`)
+                        .send(updatableLeague);
+                    expect(resFromPut.status).to.equal(204);
+
+                    const resFromGet = await app().get(`/api/v2/leagues/${id}`);
+                    expect(resFromGet.status).to.equal(200);
+                    expect(resFromGet.body).to.deep.equal(updatableLeague);
+                });
+            });
+        });
     });
 });
