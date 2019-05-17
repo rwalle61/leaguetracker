@@ -22,7 +22,7 @@ describe('/api/v2', function () {
                 expect(res.status).to.equal(200);
                 expect(res.body).to.be.an('array');
                 for (const member of res.body) {
-                    expect(fitsSchema(member, jsonSchemas.Player_v2)).to.be.true;
+                    expect(fitsSchema(member, jsonSchemas.Player_V2)).to.be.true;
                 }
                 expect(res.body).to.deep.equal(players.seed);
             });

@@ -96,7 +96,7 @@
             "description": "Got player info",
             "schema": {
               "items": {
-                "$ref": "#/definitions/Player"
+                "$ref": "#/definitions/Player_V1"
               },
               "type": "array"
             }
@@ -125,7 +125,7 @@
           "200": {
             "description": "Got player info",
             "schema": {
-              "$ref": "#/definitions/Player"
+              "$ref": "#/definitions/Player_V1"
             }
           },
           "400": {
@@ -238,7 +238,7 @@
                   "properties": {
                     "players": {
                       "items": {
-                        "$ref": "#/definitions/Player"
+                        "$ref": "#/definitions/Player_V1"
                       },
                       "type": "array"
                     },
@@ -283,9 +283,43 @@
           "leagues"
         ],
         "summary": "Get all leagues"
+      },
+      "post": {
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created a new league"
+          }
+        },
+        "tags": [
+          "leagues"
+        ],
+        "summary": "Create a new league"
       }
     },
     "/api/v2/leagues/{id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted the specified league"
+          },
+          "404": {
+            "description": "The specified resource was not found."
+          }
+        },
+        "tags": [
+          "leagues"
+        ],
+        "summary": "Delete the specified league"
+      },
       "get": {
         "produces": [
           "application/json"
@@ -310,9 +344,31 @@
           }
         },
         "tags": [
-          "league"
+          "leagues"
         ],
         "summary": "Get a single league by id"
+      },
+      "put": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Updated the specified league"
+          },
+          "404": {
+            "description": "The specified resource was not found."
+          }
+        },
+        "tags": [
+          "leagues"
+        ],
+        "summary": "Update the specified league"
       }
     },
     "/api/v2/players": {
@@ -325,7 +381,7 @@
           "200": {
             "description": "Got players info",
             "schema": {
-              "$ref": "#/definitions/Player"
+              "$ref": "#/definitions/Player_V2"
             }
           },
           "404": {
@@ -414,24 +470,50 @@
       },
       "type": "object"
     },
-    "Player": {
+    "PlayerID": {
+      "example": 42,
+      "type": "integer"
+    },
+    "PlayerName": {
+      "example": "Craig Forrest",
+      "type": "string"
+    },
+    "PlayerOptions": {
       "properties": {
-        "id": {
-          "$ref": "#/definitions/ID"
-        },
         "losses": {
-          "example": 1,
           "type": "integer"
         },
         "name": {
           "$ref": "#/definitions/PlayerName"
         },
         "score": {
-          "example": 990,
-          "type": "integer"
+          "$ref": "#/definitions/PlayerScore"
         },
         "wins": {
-          "example": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "PlayerScore": {
+      "example": 990,
+      "type": "integer"
+    },
+    "Player_V1": {
+      "properties": {
+        "losses": {
+          "type": "integer"
+        },
+        "name": {
+          "$ref": "#/definitions/PlayerName"
+        },
+        "score": {
+          "$ref": "#/definitions/PlayerScore"
+        },
+        "wins": {
           "type": "integer"
         }
       },
@@ -443,42 +525,19 @@
       ],
       "type": "object"
     },
-    "PlayerName": {
-      "example": "Craig Forrest",
-      "type": "string"
-    },
-    "PlayerOptions": {
+    "Player_V2": {
       "properties": {
-        "losses": {
-          "example": 1,
-          "type": "integer"
+        "id": {
+          "$ref": "#/definitions/PlayerID"
         },
         "name": {
           "$ref": "#/definitions/PlayerName"
-        },
-        "score": {
-          "example": 990,
-          "type": "integer"
-        },
-        "wins": {
-          "example": 0,
-          "type": "integer"
         }
       },
       "required": [
+        "id",
         "name"
       ],
-      "type": "object"
-    },
-    "Player_v2": {
-      "properties": {
-        "id": {
-          "type": "integer"
-        },
-        "name": {
-          "type": "string"
-        }
-      },
       "type": "object"
     },
     "Season": {

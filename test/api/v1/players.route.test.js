@@ -11,7 +11,7 @@ describe('/api/v1', function () {
                 expect(res.status).to.equal(200);
                 expect(res.body).to.be.an('array');
                 for (const member of res.body) {
-                    expect(fitsSchema(member, jsonSchemas.Player)).to.be.true;
+                    expect(fitsSchema(member, jsonSchemas.Player_V1)).to.be.true;
                 }
                 expect(res.body).to.deep.equal(players);
             });
@@ -24,7 +24,7 @@ describe('/api/v1', function () {
                     it('returns 200 and a body containing the player requested', async function () {
                         const res = await app().get(`/api/v1/players/${playerName}`);
                         expect(res.status).to.equal(200);
-                        expect(fitsSchema(res.body, jsonSchemas.Player)).to.be.true;
+                        expect(fitsSchema(res.body, jsonSchemas.Player_V1)).to.be.true;
                         const expectedPlayer = players.find(player => player.name === playerName);
                         expect(res.body).to.deep.equal(expectedPlayer);
                     });
