@@ -1,9 +1,7 @@
 const Knex = require('knex')(require('../../../knexfile'));
 
 const leagues = require('./data/leagues.data');
-
 const app = require('../../setup/app.setup');
-
 const { expect } = require('../../setup/chai.setup');
 const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
 
@@ -30,28 +28,30 @@ describe('/api/v2', function () {
             });
         });
         describe('POST', function () {
-            it('returns 201 and a body listing a single league', async function () {
-                const insertableleague = leagues.insertableLeague;
-                const resAfterPost = await app()
+            it('returns 201; then we can GET the created league', async function () {
+                const newLeague = leagues.insertableLeague;
+                const resFromPost = await app()
                     .post('/api/v2/leagues')
-                    .send(insertableleague);
-                expect(resAfterPost.status).to.equal(201);
+                    .send(newLeague);
+                expect(resFromPost.status).to.equal(201);
 
-                const resAfterGet = await app()
-                    .get(`/api/v2/leagues/${insertableleague.id}`);
-                expect(resAfterGet.status).to.equal(200);
-                expect(fitsSchema(resAfterGet.body, jsonSchemas.League)).to.be.true;
-                expect(resAfterGet.body).to.deep.equal(insertableleague);
+
+                const resFromGet = await app().get(`/api/v2/leagues/${newLeague.id}`);
+                expect(resFromGet.status).to.equal(200);
+                expect(fitsSchema(resFromGet.body, jsonSchemas.League)).to.be.true;
+                expect(resFromGet.body).to.deep.equal(newLeague);
             });
         });
         describe('/{id}', function () {
             describe('GET', function () {
-                it('returns 200 and a body listing a single league', async function () {
-                    const expectedLeague = leagues.existingLeague;
-                    const res = await app().get(`/api/v2/leagues/${expectedLeague.id}`);
-                    expect(res.status).to.equal(200);
-                    expect(fitsSchema(res.body, jsonSchemas.League)).to.be.true;
-                    expect(res.body).to.deep.equal(expectedLeague);
+                describe(`with valid 'id' param`, function () {
+                    it('returns 200 and a body with only the requested league', async function () {
+                        const expectedLeague = leagues.existingLeague;
+                        const res = await app().get(`/api/v2/leagues/${expectedLeague.id}`);
+                        expect(res.status).to.equal(200);
+                        expect(fitsSchema(res.body, jsonSchemas.League)).to.be.true;
+                        expect(res.body).to.deep.equal(expectedLeague);
+                    });
                 });
                 describe(`with invalid 'id' param`, function () {
                     describe('non-existent league', function () {
@@ -65,18 +65,19 @@ describe('/api/v2', function () {
                 });
             });
             describe('DELETE', function () {
-                it('returns 204 and a GET on the deleted league returns 404', async function () {
-                    const deletableLeague = leagues.existingLeague;
-                    const id = deletableLeague.id;
+                it('returns 204; then we cannot GET the deleted league', async function () {
+                    const { id } = leagues.existingLeague;
+
                     const resFromDelete = await app().delete(`/api/v2/leagues/${id}`);
                     expect(resFromDelete.status).to.equal(204);
+
                     const resFromGet = await app().get(`/api/v2/leagues/${id}`);
                     expect(resFromGet.status).to.equal(404);
                     expect(resFromGet.text).to.equal(`league ${id} not found`);
                 });
             });
             describe('PUT', function () {
-                it('returns 204 and a GET on the updated league returns 200', async function () {
+                it('returns 204; then we can GET the updated league', async function () {
                     const updatableLeague = leagues.updatableLeague;
                     const id = updatableLeague.id;
                     const resFromPut = await app()

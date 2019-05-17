@@ -1,9 +1,7 @@
 const Knex = require('knex')(require('../../../knexfile'));
 
 const players = require('./data/players.data');
-
 const app = require('../../setup/app.setup');
-
 const { expect } = require('../../setup/chai.setup');
 const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
 
@@ -24,7 +22,7 @@ describe('/api/v2', function () {
                 expect(res.status).to.equal(200);
                 expect(res.body).to.be.an('array');
                 for (const member of res.body) {
-                    expect(fitsSchema(member, jsonSchemas.Player_v2)).to.be.true;
+                    expect(fitsSchema(member, jsonSchemas.Player_V2)).to.be.true;
                 }
                 expect(res.body).to.deep.equal(players.seed);
             });

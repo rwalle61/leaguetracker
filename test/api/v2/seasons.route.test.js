@@ -1,9 +1,7 @@
 const Knex = require('knex')(require('../../../knexfile'));
 
 const seasons = require('./data/seasons.data');
-
 const app = require('../../setup/app.setup');
-
 const { expect } = require('../../setup/chai.setup');
 const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
 
