@@ -2,20 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const Knex = require('knex');
-const { Model } = require('objection');
+const { port, env } = require('./common/config');
+const { connectToDatabase } = require('./common/utils/database');
+const { syncOpenApi2and3Docs } = require('./common/utils/openapi');
 
 const v1Routes = require('./v1/routes');
 const v2Routes = require('./v2/routes');
-const connection = require('../knexfile');
-
 const middleware = require('./common/middleware');
-const { port } = require('./common/config');
-const { syncOpenApi2and3Docs } = require('./common/utils');
 
-const knexConnection = Knex(connection);
-Model.knex(knexConnection);
-
+connectToDatabase();
 syncOpenApi2and3Docs();
 
 const app = express();
@@ -28,7 +23,7 @@ app.use('/api/v2/', v2Routes);
 app.use(middleware.errorHandler.handleErrors);
 
 app.listen(port, () => {
-    console.log(`App running on ${port}`);
+    console.log(`App running on port ${port}, in env '${env}'`);
 });
 
 module.exports = app;

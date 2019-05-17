@@ -2,7 +2,8 @@ const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const path = require('path');
 
-const { getOAS2, getOAS3, syncOpenApi2and3Docs, logError } = require('../../common/utils');
+const { logError } = require('../../common/utils');
+const { getOAS2, getOAS3, syncOpenApi2and3Docs } = require('../../common/utils/openapi');
 const { pathToDocsDir } = require('../../common/config');
 
 const router = express.Router();

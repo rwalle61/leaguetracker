@@ -1,4 +1,5 @@
 const fs = require('fs-extra');
+const YAML = require('yamljs');
 const path = require('path');
 const yaml = require('js-yaml');
 const SwaggerParser = require('swagger-parser');
@@ -25,9 +26,14 @@ async function validateOAS2(openApiSpec) {
 }
 
 const pathToOAS2 = path.join(pathToDocsDir, 'openApi2.json');
+const pathToOAS3 = pathToApiSpec;
 
 function getOAS2File() {
     return fs.readJSONSync(pathToOAS2);
+}
+
+function getOAS3File() {
+    return YAML.load(pathToOAS3);
 }
 
 function deleteOAS2() {
@@ -45,4 +51,5 @@ module.exports = {
     deleteOAS2,
     readDocsDir,
     getOAS2File,
+    getOAS3File,
 };
