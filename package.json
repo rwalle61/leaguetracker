@@ -10,7 +10,6 @@
     "test:coverage:browse": "npm run test:coverage; open coverage/index.html",
     "test:unit": "stryker run",
     "test:full": "npm run lint && npm run test:coverage && npm run test:unit",
-    
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "nodemon": "nodemon src/app.js",
