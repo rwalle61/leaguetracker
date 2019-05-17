@@ -24,8 +24,7 @@ describe('utils/index.js', function () {
     describe('deepClone(obj)', function () {
         describe('valid args', function () {
             describe('array containing nested object', function () {
-                it('returns the original object and \
-                    allows the clone to be modified without affecting the original', function () {
+                it('returns the original object and allows the clone to be modified without affecting the original', function () {
                     const original = [
                         {
                             1: { 2: 'original value' },
