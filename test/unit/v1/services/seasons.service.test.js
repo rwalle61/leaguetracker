@@ -14,7 +14,7 @@ describe('seasons.service.js', function () {
                 it(`returns the player 'Richard' from season1`, function () {
                     const player = seasonsService.getPlayer(season1, 'Richard');
                     const expectedPlayer = { name: 'Richard', score: 1081, wins: 10, losses: 5, rank: 2 };
-                    expect(fitsSchema(player, jsonSchemas.Player)).to.be.true;
+                    expect(fitsSchema(player, jsonSchemas.Player_V1)).to.be.true;
                     expect(player).to.deep.equal(expectedPlayer);
                 });
             });
@@ -47,7 +47,7 @@ describe('seasons.service.js', function () {
                 it(`returns the players from season1`, function () {
                     const players = seasonsService.getPlayers(season1);
                     players.forEach(player => {
-                        expect(fitsSchema(player, jsonSchemas.Player)).to.be.true;
+                        expect(fitsSchema(player, jsonSchemas.Player_V1)).to.be.true;
                     });
                     expect(players).to.deep.equal(expectedPlayers);
                 });
@@ -143,7 +143,7 @@ describe('seasons.service.js', function () {
                         ],
                     });
                     result.season.players.forEach(player => {
-                        expect(fitsSchema(player, jsonSchemas.Player)).to.be.true;
+                        expect(fitsSchema(player, jsonSchemas.Player_V1)).to.be.true;
                     });
                     expect(result.season.players).to.be.an('array').with.deep.members([
                         { name: 'Craig', score: 1016, wins: 1, losses: 0, rank: 1 },
@@ -175,7 +175,7 @@ describe('seasons.service.js', function () {
                         ],
                     });
                     result.season.players.forEach(player => {
-                        expect(fitsSchema(player, jsonSchemas.Player)).to.be.true;
+                        expect(fitsSchema(player, jsonSchemas.Player_V1)).to.be.true;
                     });
                     expect(result.season.players).to.be.an('array').with.deep.members([
                         { name: 'Craig', score: 1016, wins: 1, losses: 0, rank: 1 },
@@ -211,7 +211,7 @@ describe('seasons.service.js', function () {
                         ],
                     });
                     result.season.players.forEach(player => {
-                        expect(fitsSchema(player, jsonSchemas.Player)).to.be.true;
+                        expect(fitsSchema(player, jsonSchemas.Player_V1)).to.be.true;
                     });
                     expect(result.season.players).to.be.an('array').with.deep.members([
                         { name: 'Richard', score: 1001, wins: 1, losses: 1, rank: 1 },

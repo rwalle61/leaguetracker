@@ -14,7 +14,7 @@ describe('players.service.js', function () {
         it('returns an array of players', function () {
             const result = getPlayers();
             for (const player of result) {
-                expect(fitsSchema(player, jsonSchemas.Player)).to.be.true;
+                expect(fitsSchema(player, jsonSchemas.Player_V1)).to.be.true;
             }
         });
     });
@@ -23,14 +23,14 @@ describe('players.service.js', function () {
             describe('Craig', function () {
                 it(`returns the player 'Craig'`, function () {
                     const result = getPlayer('Craig');
-                    expect(fitsSchema(result, jsonSchemas.Player)).to.be.true;
+                    expect(fitsSchema(result, jsonSchemas.Player_V1)).to.be.true;
                     expect(result).to.deep.include({ name: 'Craig' });
                 });
             });
             describe('Richard', function () {
                 it(`returns the player 'Richard'`, function () {
                     const result = getPlayer('Richard');
-                    expect(fitsSchema(result, jsonSchemas.Player)).to.be.true;
+                    expect(fitsSchema(result, jsonSchemas.Player_V1)).to.be.true;
                     expect(result).to.deep.include({ name: 'Richard' });
                 });
             });
@@ -41,14 +41,14 @@ describe('players.service.js', function () {
             describe('{ name: \'exampleName\' }', function () {
                 it('returns a default player with name:exampleName', function () {
                     const result = createPlayer({ name: 'exampleName' });
-                    expect(fitsSchema(result, jsonSchemas.Player)).to.be.true;
+                    expect(fitsSchema(result, jsonSchemas.Player_V1)).to.be.true;
                     expect(result).to.deep.include({ name: 'exampleName' });
                 });
             });
             describe('{ name: \'exampleName\', score: 10 }', function () {
                 it('returns a default player with name:exampleName, score:10', function () {
                     const result = createPlayer({ name: 'exampleName', score: 10 });
-                    expect(fitsSchema(result, jsonSchemas.Player)).to.be.true;
+                    expect(fitsSchema(result, jsonSchemas.Player_V1)).to.be.true;
                     expect(result).to.deep.include({
                         name: 'exampleName',
                         score: 10,

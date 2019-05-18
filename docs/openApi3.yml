@@ -38,7 +38,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Player'
+                  $ref: '#/components/schemas/Player_V1'
   /api/v1/players/{id}:
     get:
       tags:
@@ -56,7 +56,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Player'
+                $ref: '#/components/schemas/Player_V1'
         '400':
           description: Bad input parameter
         '404':
@@ -128,7 +128,7 @@ paths:
                       players:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Player'
+                          $ref: '#/components/schemas/Player_V1'
                   deltas:
                     type: array
                     items:
@@ -166,39 +166,154 @@ paths:
       responses:
         '200':
           description: Synced this API's OAS2 with its OAS3
+  /api/v2/leagues:
+    get:
+      tags:
+        - leagues
+      summary: Get all leagues
+      responses:
+        '200':
+          description: Got leagues info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/League'
+        '404':
+          $ref: '#/components/responses/404'
+    post:
+      tags:
+        - leagues
+      summary: Create a new league
+      responses:
+        '201':
+          description: Created a new league
+  /api/v2/leagues/{id}:
+    get:
+      tags:
+        - leagues
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      summary: Get a single league by id
+      responses:
+        '200':
+          description: Got league info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/League'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+        - leagues
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      summary: Update the specified league
+      responses:
+        '204':
+          description: Updated the specified league
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+        - leagues
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      summary: Delete the specified league
+      responses:
+        '204':
+          description: Deleted the specified league
+        '404':
+          $ref: '#/components/responses/404'
+  /api/v2/seasons:
+    get:
+      tags:
+        - seasons
+      summary: Get all seasons
+      responses:
+        '200':
+          description: Got seasons info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Season'
+        '404':
+          $ref: '#/components/responses/404'
+  /api/v2/players:
+    get:
+      tags:
+        - players
+      summary: Get all players
+      responses:
+        '200':
+          description: Got players info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player_V2'
+        '404':
+          $ref: '#/components/responses/404'
+
 components:
   schemas:
+    League:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
     Season:
       type: object
       properties:
-        seasonName:
+        id:
+          type: integer
+        name:
           type: string
-        players:
-          type: array
-          items:
-            $ref: '#/components/schemas/Player'
-    Player:
+        description:
+          type: string
+        leagues_id:
+          type: integer
+    Player_V2:
       type: object
       required:
-        # - id
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/PlayerID'
+        name:
+          $ref: '#/components/schemas/PlayerName'
+    Player_V1:
+      type: object
+      required:
         - name
         - score
         - wins
         - losses
       properties:
-        id:
-          $ref: '#/components/schemas/ID'
         name:
           $ref: '#/components/schemas/PlayerName'
         score:
-          type: integer
-          example: 990
+          $ref: '#/components/schemas/PlayerScore'
         wins:
           type: integer
-          example: 0
         losses:
           type: integer
-          example: 1
     PlayerOptions:
       type: object
       required:
@@ -207,21 +322,22 @@ components:
         name:
           $ref: '#/components/schemas/PlayerName'
         score:
-          type: integer
-          example: 990
+          $ref: '#/components/schemas/PlayerScore'
         wins:
           type: integer
-          example: 0
         losses:
           type: integer
-          example: 1
+    PlayerScore:
+      type: integer
+      example: 990
     PlayerName:
       type: string
       example: Craig Forrest
+    PlayerID:
+      type: integer
+      example: 42
     ID:
       type: string
-      # format: uuid
-      # example: d290f1ee-6c54-4b01-90e6-d701748f0851
     PastGame:
       type: object
       properties:
