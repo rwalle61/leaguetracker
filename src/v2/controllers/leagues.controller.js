@@ -1,6 +1,12 @@
 const leaguesService = require('../services/leagues.service');
 
-const getLeagues = () => leaguesService.getLeagues();
+const getLeagues = async function(req, res, next) {
+    try {
+        res.status(200).send(await leaguesService.getLeagues());
+    } catch(err) {
+        next(err);
+    }
+};
 
 const getLeague = async function(req, res, next) {
     try {

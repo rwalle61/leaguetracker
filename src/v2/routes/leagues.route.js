@@ -7,13 +7,7 @@ const router = express.Router();
 
 router.route('/')
     .all(validateReq)
-    .get(async (req, res, next) => {
-        try {
-            res.status(200).send(await leaguesController.getLeagues());
-        } catch(err) {
-            next(err);
-        }
-    })
+    .get(leaguesController.getLeagues)
     .post(leaguesController.postLeague);
 
 router.route('/:id')
