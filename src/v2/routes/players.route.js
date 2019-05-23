@@ -1,16 +1,12 @@
 const express = require('express');
 
 const { validateReq } = require('../../common/middleware/reqValidator');
-const playersService = require('../services/players.service');
+const playersController = require('../controllers/players.controller');
 
 const router = express.Router();
 
-router.get('/', validateReq, async (req, res, next) => {
-    try {
-        res.status(200).send(await playersService.getPlayers());
-    } catch(err) {
-        next(err);
-    }
-});
+router.route('/')
+    .all(validateReq)
+    .get(playersController.getPlayers);
 
 module.exports = router;
