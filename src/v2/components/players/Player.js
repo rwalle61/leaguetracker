@@ -1,6 +1,6 @@
 const { Model } = require('objection');
 
-const Season = require('./Season');
+const Season = require('../seasons/model');
 
 class Player extends Model {
     static get tableName() {

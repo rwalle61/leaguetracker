@@ -1,19 +1,19 @@
 const { Model } = require('objection');
 
-const League = require('./League');
+const Season = require('../seasons/model');
 
-class Season extends Model {
+class League extends Model {
     static get tableName() {
-        return 'seasons';
+        return 'leagues';
     }
     static get relationMappings() {
         return {
-            league: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: League,
+            seasons: {
+                relation: Model.HasManyRelation,
+                modelClass: Season,
                 join: {
-                    from: 'seasons.seasons_id',
-                    to: 'leagues.id',
+                    from: 'leagues.id',
+                    to: 'seasons.leagues_id',
                 },
             },
         };
@@ -21,7 +21,7 @@ class Season extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['name', 'description', 'seasons_id'],
+            required: ['name', 'description'],
             properties: {
                 id: {
                     type: 'integer',
@@ -36,12 +36,9 @@ class Season extends Model {
                     minLength: 1,
                     maxLength: 255,
                 },
-                leagues_id: {
-                    type: 'integer',
-                },
             },
         };
     }
 }
 
-module.exports = Season;
+module.exports = League;

@@ -1,8 +1,8 @@
 const express = require('express');
 
-const leagues = require('./leagues.route');
-const seasons = require('./seasons.route');
-const players = require('./players.route');
+const leagues = require('./leagues/route');
+const seasons = require('./seasons/route');
+const players = require('./players/route');
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-const seasonsService = require('../services/seasons.service');
+const seasonsService = require('./service');
 
 const getSeasons = async function(req, res, next) {
     try {

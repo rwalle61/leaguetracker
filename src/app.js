@@ -7,7 +7,7 @@ const { connectToDatabase } = require('./common/utils/database');
 const { syncOpenApi2and3Docs } = require('./common/utils/openapi');
 
 const v1Routes = require('./v1/routes');
-const v2Routes = require('./v2/routes');
+const v2Routes = require('./v2/components');
 const middleware = require('./common/middleware');
 
 connectToDatabase();

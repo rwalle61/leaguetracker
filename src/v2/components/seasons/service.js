@@ -1,4 +1,4 @@
-const Season = require('../models/Season');
+const Season = require('./model');
 
 const getSeasons = () => Season.query();
 

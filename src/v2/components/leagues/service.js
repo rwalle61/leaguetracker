@@ -1,4 +1,4 @@
-const League = require('../models/League');
+const League = require('./model');
 
 const getLeagues = () => League.query();
 const getLeague = (id) => League.query().findById(id);

@@ -1,4 +1,4 @@
-const leaguesService = require('../services/leagues.service');
+const leaguesService = require('./service');
 
 const getLeagues = async function(req, res, next) {
     try {

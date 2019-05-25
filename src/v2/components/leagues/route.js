@@ -1,7 +1,7 @@
 const express = require('express');
 
-const { validateReq } = require('../../common/middleware/reqValidator');
-const leaguesController = require('../controllers/leagues.controller');
+const { validateReq } = require('../../../common/middleware/reqValidator');
+const leaguesController = require('./controller');
 
 const router = express.Router();
 
