@@ -262,6 +262,115 @@
         "summary": "Update a season"
       }
     },
+    "/api/v2/games": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Got games info",
+            "schema": {
+              "$ref": "#/definitions/Game"
+            }
+          },
+          "404": {
+            "description": "The specified resource was not found."
+          }
+        },
+        "tags": [
+          "games"
+        ],
+        "summary": "Get all games"
+      },
+      "post": {
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created a new game"
+          }
+        },
+        "tags": [
+          "games"
+        ],
+        "summary": "Create a new game"
+      }
+    },
+    "/api/v2/games/{id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted the specified game"
+          },
+          "404": {
+            "description": "The specified resource was not found."
+          }
+        },
+        "tags": [
+          "games"
+        ],
+        "summary": "Delete the specified game"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Got game info",
+            "schema": {
+              "$ref": "#/definitions/Game"
+            }
+          },
+          "404": {
+            "description": "The specified resource was not found."
+          }
+        },
+        "tags": [
+          "games"
+        ],
+        "summary": "Get a single game by id"
+      },
+      "put": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Updated the specified game"
+          },
+          "404": {
+            "description": "The specified resource was not found."
+          }
+        },
+        "tags": [
+          "games"
+        ],
+        "summary": "Update the specified game"
+      }
+    },
     "/api/v2/leagues": {
       "get": {
         "produces": [
@@ -432,6 +541,17 @@
             "$ref": "#/definitions/PlayerName"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "Game": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "seasons_id": {
+          "type": "integer"
         }
       },
       "type": "object"

@@ -1,6 +1,7 @@
 const { Model } = require('objection');
 
 const League = require('./League');
+const Game = require('./Game');
 
 class Season extends Model {
     static get tableName() {
@@ -12,8 +13,16 @@ class Season extends Model {
                 relation: Model.BelongsToOneRelation,
                 modelClass: League,
                 join: {
-                    from: 'seasons.seasons_id',
+                    from: 'seasons.leagues_id',
                     to: 'leagues.id',
+                },
+            },
+            games: {
+                relation: Model.HasManyRelation,
+                modelClass: Game,
+                join: {
+                    from: 'seasons.id',
+                    to: 'games.seasons_id',
                 },
             },
         };

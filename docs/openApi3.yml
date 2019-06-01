@@ -265,6 +265,77 @@ paths:
                 $ref: '#/components/schemas/Player_V2'
         '404':
           $ref: '#/components/responses/404'
+  /api/v2/games:
+    get:
+      tags:
+        - games
+      summary: Get all games
+      responses:
+        '200':
+          description: Got games info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '404':
+          $ref: '#/components/responses/404'
+    post:
+      tags:
+        - games
+      summary: Create a new game
+      responses:
+        '201':
+          description: Created a new game
+  /api/v2/games/{id}:
+    get:
+      tags:
+        - games
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      summary: Get a single game by id
+      responses:
+        '200':
+          description: Got game info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+        - games
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      summary: Update the specified game
+      responses:
+        '204':
+          description: Updated the specified game
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+        - games
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      summary: Delete the specified game
+      responses:
+        '204':
+          description: Deleted the specified game
+        '404':
+          $ref: '#/components/responses/404'
 
 components:
   schemas:
@@ -287,6 +358,13 @@ components:
         description:
           type: string
         leagues_id:
+          type: integer
+    Game:
+      type: object
+      properties:
+        id:
+          type: integer
+        seasons_id:
           type: integer
     Player_V2:
       type: object
