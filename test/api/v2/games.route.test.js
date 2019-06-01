@@ -24,29 +24,29 @@ describe('/api/v2', function () {
                 for (const member of res.body) {
                     expect(fitsSchema(member, jsonSchemas.Game)).to.be.true;
                 }
-                expect(res.body).to.deep.equal(games.seed);
+                expect(res.body).to.deep.equal(games.seedGamesWithPlayerRelations);
             });
         });
         describe('POST', function () {
             it('returns 201; then we can GET the created game', async function () {
                 const newGame = games.insertableGame;
+                const newGameWithRelation = games.game4WithPlayersRelations;
                 const resFromPost = await app()
                     .post('/api/v2/games')
                     .send(newGame);
                 expect(resFromPost.status).to.equal(201);
 
-
                 const resFromGet = await app().get(`/api/v2/games/${newGame.id}`);
                 expect(resFromGet.status).to.equal(200);
                 expect(fitsSchema(resFromGet.body, jsonSchemas.Game)).to.be.true;
-                expect(resFromGet.body).to.deep.equal(newGame);
+                expect(resFromGet.body).to.deep.equal(newGameWithRelation);
             });
         });
         describe('/{id}', function () {
             describe('GET', function () {
                 describe(`with valid 'id' param`, function () {
                     it('returns 200 and a body with only the requested game', async function () {
-                        const expectedGame = games.existingGame;
+                        const expectedGame = games.game1WithPlayersRelations;
                         const res = await app().get(`/api/v2/games/${expectedGame.id}`);
                         expect(res.status).to.equal(200);
                         expect(fitsSchema(res.body, jsonSchemas.Game)).to.be.true;
@@ -79,6 +79,7 @@ describe('/api/v2', function () {
             describe('PUT', function () {
                 it('returns 204; then we can GET the updated game', async function () {
                     const updatableGame = games.updatableGame;
+                    const updatedGameWithRelation = games.updatableGameWithPlayersRelations;
                     const id = updatableGame.id;
                     const resFromPut = await app()
                         .put(`/api/v2/games/${id}`)
@@ -87,7 +88,7 @@ describe('/api/v2', function () {
 
                     const resFromGet = await app().get(`/api/v2/games/${id}`);
                     expect(resFromGet.status).to.equal(200);
-                    expect(resFromGet.body).to.deep.equal(updatableGame);
+                    expect(resFromGet.body).to.deep.equal(updatedGameWithRelation);
                 });
             });
         });
