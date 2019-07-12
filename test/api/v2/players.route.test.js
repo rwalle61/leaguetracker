@@ -5,17 +5,17 @@ const app = require('../../setup/app.setup');
 const { expect } = require('../../setup/chai.setup');
 const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
 
-describe('/api/v2', function () {
+describe('/api/v2/players', function () {
     before(async function(){
         this.timeout(10000);
-        await Knex.migrate.rollback();
-        await Knex.migrate.latest();
+        await Knex.migrate.rollback({ directory: ['test/config/migrations'] });
+        await Knex.migrate.latest({ directory: ['test/config/migrations'] });
     });
     beforeEach(async function() {
         this.timeout(10000);
         await Knex.seed.run();
     });
-    describe('/players', function () {
+    describe('', function () {
         describe('GET', function () {
             it('returns 200 and a body listing all players', async function () {
                 const res = await app().get('/api/v2/players');
