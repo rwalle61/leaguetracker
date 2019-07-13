@@ -25,8 +25,9 @@ const getLeague = async function(req, res, next) {
 const postLeague = async function(req, res, next) {
     try {
         const league = req.body;
-        await leaguesService.postLeague(league);
-        res.status(201).send();
+        const { id } = await leaguesService.postLeague(league);
+        const location = `${req.protocol}://${req.get('host')}${req.originalUrl}/${id}`;
+        res.status(201).set({ location }).send();
     } catch(err) {
         next(err);
     }

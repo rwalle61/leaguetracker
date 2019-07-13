@@ -25,8 +25,9 @@ const getGame = async function(req, res, next) {
 const postGame = async function(req, res, next) {
     try {
         const game = req.body;
-        await gamesService.postGame(game);
-        res.status(201).send();
+        const { id } = await gamesService.postGame(game);
+        const location = `${req.protocol}://${req.get('host')}${req.originalUrl}/${id}`;
+        res.status(201).set({ location }).send();
     } catch(err) {
         next(err);
     }
