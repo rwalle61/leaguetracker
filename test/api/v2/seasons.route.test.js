@@ -8,12 +8,15 @@ const { jsonSchemas, fitsSchema } = require('../../setup/jsonSchemas.setup');
 describe('/api/v2/seasons', function () {
     before(async function(){
         this.timeout(10000);
-        await Knex.migrate.rollback({ directory: ['test/config/migrations'] });
         await Knex.migrate.latest({ directory: ['test/config/migrations'] });
     });
     beforeEach(async function() {
         this.timeout(10000);
         await Knex.seed.run();
+    });
+    after(async function(){
+        this.timeout(10000);
+        await Knex.migrate.rollback({ directory: ['test/config/migrations'] });
     });
     describe('GET', function () {
         it('returns 200 and a body listing all seasons', async function () {
